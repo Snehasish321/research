@@ -230,25 +230,28 @@
 
     /* ── Hero Slider ── */
     #hero {
-      position: relative; width: 100%; height: 100vh;
-      min-height: 560px; overflow: hidden;
-      padding-top: 102px; /* top-bar 38px + navbar 64px */
-      box-sizing: border-box;
+      position: relative; width: 100%;
+      height: calc(100vh - 102px); /* viewport minus top-bar(38) + navbar(64) */
+      min-height: 480px; overflow: hidden;
+      margin-top: 102px;
     }
     .slide {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
       opacity: 0; transition: opacity 0.85s ease;
+      pointer-events: none; /* inactive slides must not intercept clicks */
     }
-    .slide.active { opacity: 1; }
+    .slide.active { opacity: 1; pointer-events: auto; }
     .slide-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(130deg, rgba(0,20,60,0.76) 0%, rgba(0,80,160,0.52) 100%);
+      pointer-events: none; /* decorative only — never block clicks */
     }
     .slide-body {
       position: absolute; inset: 0;
       display: flex; flex-direction: column; justify-content: center;
       padding: 0 8%; max-width: 680px;
+      z-index: 2; /* sit above the overlay so the CTA button is always clickable */
     }
     .slide-label {
       font-size: 11px; font-weight: 700; text-transform: uppercase;
@@ -798,7 +801,7 @@
       <p class="slide-label">Adamas University</p>
       <h2 class="slide-heading">Welcome To<br>Adamas University</h2>
       <p class="slide-desc">Fostering a culture of discovery, innovation, and academic excellence across all disciplines of knowledge.</p>
-      <a href="#content" class="slide-cta" id="hero-cta-1">Learn More <i class="fa-solid fa-chevron-right text-xs"></i></a>
+      <a href="https://research.adamasuniversity.ac.in/" class="slide-cta" id="hero-cta-1">Explore Research <i class="fa-solid fa-chevron-right text-xs"></i></a>
     </div>
   </div>
 
