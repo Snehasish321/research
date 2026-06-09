@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#005aab" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+  <!-- SEO -->
+  <title>Research — Adamas University</title>
+  <link rel="canonical" href="https://research.adamasuniversity.ac.in/" />
+  <meta name="description" content="Adamas University Research Portal — Explore interdisciplinary research, publications, patents, funded projects, Ph.D. programs, and research centres." />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Research — Adamas University" />
+  <meta property="og:url" content="https://research.adamasuniversity.ac.in/" />
+  <meta property="og:site_name" content="Research - Adamas University" />
+  <meta property="article:modified_time" content="2024-12-31T11:34:41+00:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://research.adamasuniversity.ac.in/","url":"https://research.adamasuniversity.ac.in/","name":"Research - Research - Adamas University","isPartOf":{"@id":"https://research.adamasuniversity.ac.in/#website"},"datePublished":"2021-05-16T13:09:16+00:00","dateModified":"2024-12-31T11:34:41+00:00","breadcrumb":{"@id":"https://research.adamasuniversity.ac.in/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://research.adamasuniversity.ac.in/"]}]},{"@type":"BreadcrumbList","@id":"https://research.adamasuniversity.ac.in/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https://research.adamasuniversity.ac.in/#website","url":"https://research.adamasuniversity.ac.in/","name":"Research - Adamas University","description":"Just another Network site","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://research.adamasuniversity.ac.in/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"}]}
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17163552/cropped-au-footer-logo.png" sizes="32x32" />
+  <link rel="icon" href="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17163552/cropped-au-footer-logo.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17163552/cropped-au-footer-logo.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#005aab', dark: '#003d73', light: '#1f7ae0' },
+            surface: '#f8fafc',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Libre Baskerville"', 'Georgia', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #1a1a1a; background: #fff; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Preloader ── */
+    #preloader {
+      position: fixed; inset: 0; background: #fff; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+    .preloader-ring {
+      width: 52px; height: 52px;
+      border: 3px solid #e5e7eb; border-top-color: #005aab;
+      border-radius: 50%; animation: spin 0.75s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Top Bar ── */
+    #top-bar {
+      background: #003d73; color: #fff;
+      font-size: 13px; position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
+    }
+    .top-bar-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 24px;
+      height: 38px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-bar-links { display: flex; align-items: center; gap: 0; }
+    .top-bar-link {
+      color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px;
+      font-weight: 500; padding: 0 14px; border-right: 1px solid rgba(255,255,255,0.2);
+      line-height: 38px; display: flex; align-items: center; gap: 5px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .top-bar-link:first-child { padding-left: 0; }
+    .top-bar-link:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .top-bar-search {
+      color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px;
+      font-weight: 500; display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .top-bar-search:hover { color: #fff; }
+    /* Top-bar News & Events has a tiny dropdown indicator */
+    .top-bar-link .tb-arrow { font-size: 8px; opacity: 0.6; }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed; left: 0; right: 0; z-index: 1000; top: 38px;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      transition: box-shadow 0.3s ease;
+    }
+    #navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.10); }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 24px;
+      height: 64px; display: flex; align-items: center;
+      justify-content: space-between; gap: 8px;
+    }
+    /* Nav link colour — always dark on white */
+    .nav-link { color: #1a2540; }
+    .nav-link:hover { color: #005aab; }
+
+    /* Desktop nav list */
+    #nav-desktop {
+      display: none; list-style: none;
+      align-items: center; gap: 0; flex: 1; justify-content: flex-end;
+    }
+    @media (min-width: 1100px) { #nav-desktop { display: flex; } }
+    @media (min-width: 1100px) { #mob-toggle { display: none !important; } }
+
+    /* ── Mega Dropdown ── */
+    .has-dropdown { position: relative; }
+    .nav-trigger {
+      display: flex; align-items: center; gap: 4px; padding: 0 14px;
+      font-size: 13.5px; font-weight: 500; cursor: pointer; height: 64px;
+      text-decoration: none; white-space: nowrap; background: none; border: none;
+      color: #1a2540; transition: color 0.2s, border-color 0.2s;
+      border-bottom: 3px solid transparent; user-select: none;
+    }
+    .nav-trigger:hover { color: #005aab; }
+    .has-dropdown:hover .nav-trigger { color: #005aab; border-bottom-color: #005aab; }
+    .nav-trigger .chevron { font-size: 9px; opacity: 0.5; transition: transform 0.2s; }
+    .has-dropdown:hover .nav-trigger .chevron { transform: rotate(180deg); }
+
+    /* Dropdown panel */
+    .dropdown-panel {
+      position: absolute; top: 100%; z-index: 500;
+      background: #fff; border-radius: 10px; min-width: 220px;
+      border-top: 3px solid #005aab;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
+      opacity: 0; visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    .dropdown-panel.align-left  { left: 0; }
+    .dropdown-panel.align-right { right: 0; left: auto; }
+    .dropdown-panel.align-center { left: 50%; transform: translateX(-50%) translateY(-6px); }
+    .has-dropdown:hover .dropdown-panel,
+    .has-dropdown:focus-within .dropdown-panel {
+      opacity: 1; visibility: visible; transform: translateY(0);
+      pointer-events: auto;
+    }
+    .has-dropdown:hover .align-center,
+    .has-dropdown:focus-within .align-center {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Dropdown items */
+    .dd-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 18px; font-size: 13px; color: #374151;
+      border-bottom: 1px solid #f3f4f6; text-decoration: none;
+      transition: background 0.15s, color 0.15s; cursor: pointer;
+      background: none; border-left: none; border-right: none; border-top: none; width: 100%;
+      text-align: left;
+    }
+    .dd-item:last-child { border-bottom: none; }
+    .dd-item:hover { background: #f0f7ff; color: #005aab; }
+    .dd-item .dd-arrow { font-size: 9px; opacity: 0.4; }
+
+    /* Nested submenu */
+    .has-sub { position: relative; }
+    .sub-panel {
+      position: absolute; top: -3px; left: 100%;
+      background: #fff; border-radius: 10px; min-width: 220px;
+      border-top: 3px solid #005aab;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      opacity: 0; visibility: hidden;
+      transform: translateX(-6px);
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+      pointer-events: none; z-index: 600;
+    }
+    .has-sub:hover .sub-panel,
+    .has-sub:focus-within .sub-panel {
+      opacity: 1; visibility: visible; transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    /* Mega panel (Research) */
+    .mega-panel {
+      position: absolute; top: 100%; left: 0;
+      background: #fff; border-radius: 10px; width: 720px;
+      border-top: 3px solid #005aab;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      padding: 28px; opacity: 0; visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+      pointer-events: none; z-index: 500;
+    }
+    .has-mega:hover .mega-panel,
+    .has-mega:focus-within .mega-panel {
+      opacity: 1; visibility: visible; transform: translateY(0);
+      pointer-events: auto;
+    }
+    .mega-col-title {
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: #005aab;
+      padding-bottom: 8px; margin-bottom: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .mega-link {
+      display: block; padding: 5px 0; font-size: 13px; color: #374151;
+      text-decoration: none; transition: color 0.15s;
+      border-bottom: none;
+    }
+    .mega-link:hover { color: #005aab; }
+
+    /* ── Hero Slider ── */
+    #hero {
+      position: relative; width: 100%; height: 100vh;
+      min-height: 560px; overflow: hidden;
+      padding-top: 102px; /* top-bar 38px + navbar 64px */
+      box-sizing: border-box;
+    }
+    .slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 0.85s ease;
+    }
+    .slide.active { opacity: 1; }
+    .slide-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(130deg, rgba(0,20,60,0.76) 0%, rgba(0,80,160,0.52) 100%);
+    }
+    .slide-body {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 8%; max-width: 680px;
+    }
+    .slide-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.2em; color: rgba(255,255,255,0.55);
+      margin-bottom: 12px; opacity: 0; transform: translateY(16px);
+      transition: opacity 0.6s ease 0.05s, transform 0.6s ease 0.05s;
+    }
+    .slide-heading {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 700;
+      color: #fff; line-height: 1.15; margin-bottom: 20px;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.25);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.65s ease 0.15s, transform 0.65s ease 0.15s;
+    }
+    .slide-desc {
+      font-size: 1.05rem; color: rgba(255,255,255,0.82);
+      line-height: 1.75; margin-bottom: 36px; max-width: 460px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.65s ease 0.25s, transform 0.65s ease 0.25s;
+    }
+    .slide-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: #005aab;
+      font-weight: 700; font-size: 13px;
+      padding: 14px 32px; border-radius: 4px;
+      text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+      transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.65s ease 0.35s, transform 0.65s ease 0.35s, background 0.2s, color 0.2s, box-shadow 0.2s;
+      align-self: flex-start;
+    }
+    .slide-cta:hover {
+      background: #005aab; color: #fff;
+      transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,90,171,0.4);
+    }
+    .slide.active .slide-label,
+    .slide.active .slide-heading,
+    .slide.active .slide-desc,
+    .slide.active .slide-cta {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* Slider arrows */
+    .sl-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+      width: 50px; height: 50px; border-radius: 50%;
+      background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.28);
+      color: #fff; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; backdrop-filter: blur(8px);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .sl-arrow:hover { background: rgba(255,255,255,0.28); border-color: rgba(255,255,255,0.6); transform: translateY(-50%) scale(1.05); }
+    .sl-prev { left: 28px; }
+    .sl-next { right: 28px; }
+
+    /* Slider dots */
+    .sl-dots {
+      position: absolute; bottom: 32px; left: 50%;
+      transform: translateX(-50%); display: flex; gap: 8px; z-index: 20;
+    }
+    .sl-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.35); border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.2s; padding: 0;
+    }
+    .sl-dot.active { background: #fff; transform: scale(1.4); }
+
+    /* ── Section Reveals ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-l { opacity: 0; transform: translateX(-28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-l.in { opacity: 1; transform: translateX(0); }
+    .reveal-r { opacity: 0; transform: translateX(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-r.in { opacity: 1; transform: translateX(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* ── Stats ── */
+    .stat-val { font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 800; color: #fff; line-height: 1; }
+
+    /* ── Research Cards ── */
+    .research-card {
+      border-left: 3px solid #005aab; padding: 20px 22px;
+      background: #fff; border-radius: 0 10px 10px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .research-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 6px 24px rgba(0,90,171,0.13);
+    }
+    .research-card h3 { font-size: 1rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+    .research-card p { font-size: 0.875rem; color: #5f6b7a; line-height: 1.65; margin-bottom: 10px; }
+    .research-card a {
+      color: #005aab; font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .research-card a:hover { color: #003d73; gap: 8px; }
+
+    /* ── Quick Links ── */
+    .quick-link {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 20px 12px; border-radius: 12px; border: 1px solid #e5e7eb;
+      text-decoration: none; transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .quick-link:hover { border-color: #005aab; background: #f0f7ff; transform: translateY(-3px); }
+    .ql-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: #f0f7ff; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px; transition: background 0.2s;
+    }
+    .quick-link:hover .ql-icon { background: #005aab; }
+    .ql-icon i { color: #005aab; font-size: 18px; transition: color 0.2s; }
+    .quick-link:hover .ql-icon i { color: #fff; }
+    .ql-label { font-size: 12px; font-weight: 600; color: #374151; }
+    .quick-link:hover .ql-label { color: #005aab; }
+
+    /* ── Image zoom ── */
+    .img-zoom { overflow: hidden; }
+    .img-zoom img { transition: transform 0.55s ease; width: 100%; }
+    .img-zoom:hover img { transform: scale(1.04); }
+
+    /* ── Mobile Drawer ── */
+    #mob-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 1100; opacity: 0; visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    #mob-overlay.open { opacity: 1; visibility: visible; }
+    #mob-drawer {
+      position: fixed; top: 0; left: 0; bottom: 0;
+      width: 320px; max-width: 90vw; background: #fff;
+      z-index: 1200; overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 6px 0 48px rgba(0,0,0,0.14);
+    }
+    #mob-drawer.open { transform: translateX(0); }
+    .mob-acc-btn {
+      width: 100%; text-align: left; display: flex;
+      align-items: center; justify-content: space-between;
+      padding: 15px 20px; font-size: 14px; font-weight: 600; color: #1a1a1a;
+      border-bottom: 1px solid #f3f4f6;
+      background: none; border-left: none; border-right: none; border-top: none; cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+    }
+    .mob-acc-btn:hover { color: #005aab; background: #f8fafc; }
+    .mob-acc-btn.open { color: #005aab; background: #f0f7ff; }
+    .mob-acc-icon { font-size: 10px; opacity: 0.5; transition: transform 0.25s; }
+    .mob-acc-btn.open .mob-acc-icon { transform: rotate(180deg); }
+    .mob-acc-panel { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+    .mob-acc-panel.open { max-height: 3000px; }
+    .mob-link {
+      display: block; padding: 10px 20px 10px 36px; font-size: 13px;
+      color: #4b5563; border-bottom: 1px solid #f9fafb;
+      text-decoration: none; transition: color 0.2s, background 0.2s;
+    }
+    .mob-link:hover { color: #005aab; background: #f8fafc; }
+    .mob-link.l2 { padding-left: 52px; color: #6b7280; font-size: 12.5px; }
+    .mob-link.l3 { padding-left: 68px; color: #9ca3af; font-size: 12px; }
+    .mob-link.section-head { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #005aab; padding-left: 36px; padding-top: 14px; padding-bottom: 4px; background: none; }
+
+    /* ── Footer ── */
+    #footer { background: #111827; color: #fff; }
+    .ft-head {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
+      margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .ft-link {
+      display: flex; align-items: center; gap: 6px; padding: 5px 0;
+      font-size: 13.5px; color: rgba(255,255,255,0.65);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .ft-link::before { content: '›'; color: #1f7ae0; font-size: 15px; line-height: 1; }
+    .ft-link:hover { color: #fff; }
+
+
+
+
+    /* ── Focus accessibility ── */
+    a:focus-visible, button:focus-visible { outline: 2px solid #005aab; outline-offset: 2px; border-radius: 4px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .slide-body { padding: 0 6%; }
+    }
+    @media (max-width: 480px) {
+      .slide-body { padding: 0 5%; }
+    }
+
+    /* Sub-panel left-side (for overflow items) */
+    .sub-panel.left-side {
+      left: auto; right: 100%; transform: translateX(6px);
+    }
+    .has-sub:hover .sub-panel.left-side { transform: translateX(0); }
+  </style>
+</head>
+<body>
+
+<!-- Skip link -->
+<a href="#content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-700 text-white px-4 py-2 rounded z-50 text-sm font-semibold">Skip to main content</a>
+
+<!-- ──────────────── PRELOADER ──────────────── -->
+<div id="preloader" role="status" aria-label="Loading page">
+  <div class="preloader-ring"></div>
+</div>
+
+<!-- ──────────────── TOP BAR ──────────────── -->
+<div id="top-bar" role="navigation" aria-label="Secondary navigation">
+  <div class="top-bar-inner">
+    <nav class="top-bar-links" aria-label="Top links">
+      <a href="https://research.adamasuniversity.ac.in/anveshan/" class="top-bar-link">News &amp; Events <i class="fa-solid fa-chevron-down tb-arrow"></i></a>
+      <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="top-bar-link">Career</a>
+      <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="top-bar-link">Central Instrumentation Facility</a>
+    </nav>
+    <form role="search" method="get" action="https://research.adamasuniversity.ac.in/" class="top-bar-search">
+      <label for="top-search" class="sr-only">Search</label>
+      <i class="fa-solid fa-magnifying-glass" style="font-size:12px;"></i>
+      <input id="top-search" type="text" name="s" placeholder="Search" class="bg-transparent border-none outline-none text-white placeholder-white/60 text-sm w-28 focus:w-40 transition-all duration-300" />
+    </form>
+  </div>
+</div>
+
+<!-- ──────────────── NAVBAR ──────────────── -->
+<nav id="navbar" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    <!-- Logo (always colored on white bar) -->
+    <a href="https://research.adamasuniversity.ac.in/" aria-label="Research — Adamas University home" class="shrink-0 flex items-center">
+      <img class="h-11 w-auto" src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/20063958/logo_601.png" alt="Research – Adamas University" width="200" height="60" />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <ul id="nav-desktop" role="menubar" aria-label="Primary navigation">
+
+      <!-- Research ▸ Mega Panel -->
+      <li class="has-dropdown has-mega" role="none">
+        <a href="https://research.adamasuniversity.ac.in/" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false">
+          Research <i class="fa-solid fa-chevron-down chevron"></i>
+        </a>
+        <div class="mega-panel" role="region" aria-label="Research submenu">
+          <div class="grid grid-cols-3 gap-8">
+            <div>
+              <div class="mega-col-title">Research</div>
+              <a href="https://research.adamasuniversity.ac.in/policy/" class="mega-link">Policy</a>
+              <a href="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2022/06/07052324/Policy-on-Promotion-of-Academic-Integrity-and-Prevention-of-Plagiarism.pdf" class="mega-link" target="_blank" rel="noopener">Code of Ethics for Research</a>
+              <a href="#" class="mega-link">Collaboration</a>
+              <a href="https://auaicoe.in/other-centres-of-excellence/" class="mega-link" target="_blank" rel="noopener">Centres of Excellence</a>
+              <div class="mega-col-title mt-5">Engineering Depts.</div>
+              <a href="https://engineering.adamasuniversity.ac.in/department-of-civil-engineering/" class="mega-link">Civil Engineering</a>
+              <a href="https://engineering.adamasuniversity.ac.in/department-of-computer-science-and-engineering/" class="mega-link">Computer Science & Engg.</a>
+              <a href="https://engineering.adamasuniversity.ac.in/department-of-electrical-electronics-engineering/" class="mega-link">Electrical Engineering</a>
+              <a href="#" class="mega-link">Electronics & Comm. Engg.</a>
+              <a href="https://engineering.adamasuniversity.ac.in/department-of-mechanical-engineering/" class="mega-link">Mechanical Engineering</a>
+              <a href="#" class="mega-link">Biomedical Engineering</a>
+            </div>
+            <div>
+              <div class="mega-col-title">Schools</div>
+              <a href="https://science.adamasuniversity.ac.in/chemistry/" class="mega-link">School of Basic &amp; Applied Sciences (SOBAS)</a>
+              <a href="https://business.adamasuniversity.ac.in/department-of-commerce/" class="mega-link">School of Business &amp; Economics (SOBE)</a>
+              <a href="https://education.adamasuniversity.ac.in/department-of-education/" class="mega-link">School of Education (SOE)</a>
+              <a href="https://engineering.adamasuniversity.ac.in/department-of-civil-engineering/" class="mega-link">School of Engineering &amp; Technology (SOET)</a>
+              <a href="https://law.adamasuniversity.ac.in/department-of-law/" class="mega-link">School of Law &amp; Justice (SOLJ)</a>
+              <a href="https://social-sciences.adamasuniversity.ac.in/bengali-language-and-literature/" class="mega-link">School of Liberal Arts &amp; Culture Studies (SOLACS)</a>
+              <a href="https://biotechnology.adamasuniversity.ac.in/department-of-biotechnology/" class="mega-link">School of Life Science &amp; Biotechnology (SOLB)</a>
+              <a href="https://media.adamasuniversity.ac.in/department-of-journalism-and-mass-communication/" class="mega-link">School of Media &amp; Communication (SOMC)</a>
+              <a href="https://medical-studies.adamasuniversity.ac.in/department-of-pharmaceutical-technology/" class="mega-link">School of Medical Sciences</a>
+              <a href="https://smart-agriculture.adamasuniversity.ac.in/agriculture/" class="mega-link">School of Smart Agriculture (SOSA)</a>
+            </div>
+            <div>
+              <div class="mega-col-title">Science Departments</div>
+              <a href="https://science.adamasuniversity.ac.in/chemistry/" class="mega-link">Chemistry</a>
+              <a href="https://science.adamasuniversity.ac.in/environmental-science/" class="mega-link">Environmental Science</a>
+              <a href="https://science.adamasuniversity.ac.in/department-of-forensic-science/" class="mega-link">Forensic Science</a>
+              <a href="https://science.adamasuniversity.ac.in/geography/" class="mega-link">Geography</a>
+              <a href="https://science.adamasuniversity.ac.in/mathematics/" class="mega-link">Mathematics</a>
+              <a href="https://science.adamasuniversity.ac.in/physics/" class="mega-link">Physics</a>
+              <div class="mega-col-title mt-5">Social Sciences</div>
+              <a href="https://social-sciences.adamasuniversity.ac.in/bengali-language-and-literature/" class="mega-link">Bengali Language &amp; Literature</a>
+              <a href="https://social-sciences.adamasuniversity.ac.in/department-of-english-language-and-literature/" class="mega-link">English Language &amp; Literature</a>
+              <a href="https://social-sciences.adamasuniversity.ac.in/department-of-history/" class="mega-link">History</a>
+              <a href="https://social-sciences.adamasuniversity.ac.in/department-of-political-science/" class="mega-link">Political Science</a>
+              <a href="#" class="mega-link">Psychology</a>
+              <a href="https://social-sciences.adamasuniversity.ac.in/department-of-sociology/" class="mega-link">Sociology</a>
+              <a href="#" class="mega-link">Creative Arts &amp; Culture Studies</a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- Infrastructure -->
+      <li class="has-dropdown" role="none">
+        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">
+          Infrastructure <i class="fa-solid fa-chevron-down chevron"></i>
+        </a>
+        <div class="dropdown-panel align-left" role="region" aria-label="Infrastructure submenu">
+          <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="dd-item">Central Instrumentation Facility</a>
+        </div>
+      </li>
+
+      <!-- Publication & Patent -->
+      <li class="has-dropdown" role="none">
+        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">
+          Publication &amp; Patent <i class="fa-solid fa-chevron-down chevron"></i>
+        </a>
+        <div class="dropdown-panel align-left" style="min-width:240px;" role="region" aria-label="Publication and Patent submenu">
+          <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="dd-item">Published Research Papers</a>
+          <a href="https://research.adamasuniversity.ac.in/publications/" class="dd-item">Journals</a>
+          <a href="https://research.adamasuniversity.ac.in/book/" class="dd-item">Books / Chapters</a>
+          <a href="https://research.adamasuniversity.ac.in/patents/" class="dd-item">Patents</a>
+          <div class="has-sub">
+            <span class="dd-item cursor-default">Adamas Technical Review <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
+            <div class="sub-panel" role="region">
+              <a href="https://research.adamasuniversity.ac.in/volume-2-issue-2/" class="dd-item">Volume 2 Issue 2</a>
+              <a href="https://research.adamasuniversity.ac.in/volume-2-issue-1/" class="dd-item">Volume 2 Issue 1</a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- Funded Projects -->
+      <li class="has-dropdown" role="none">
+        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">
+          Funded Projects <i class="fa-solid fa-chevron-down chevron"></i>
+        </a>
+        <div class="dropdown-panel align-left" role="region" aria-label="Funded Projects submenu">
+          <a href="https://research.adamasuniversity.ac.in/extramural/" class="dd-item">Extramural</a>
+        </div>
+      </li>
+
+      <!-- Research Program -->
+      <li class="has-dropdown" role="none">
+        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">
+          Research Program <i class="fa-solid fa-chevron-down chevron"></i>
+        </a>
+        <div class="dropdown-panel align-left" style="min-width:270px;" role="region" aria-label="Research Program submenu">
+          <div class="has-sub">
+            <span class="dd-item cursor-default">Ph.D. Program <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
+            <div class="sub-panel" role="region">
+              <a href="https://research.adamasuniversity.ac.in/empaneled-supervisor/" class="dd-item">Empaneled Supervisor</a>
+              <a href="https://research.adamasuniversity.ac.in/phd-active-students-list-2015-2024/" class="dd-item">Ph.D Enrolled Scholars</a>
+              <a href="https://research.adamasuniversity.ac.in/ph-d-award-letters/" class="dd-item">Ph.D. Award Letters</a>
+              <a href="https://research.adamasuniversity.ac.in/ph-d-regulations/" class="dd-item">Ph.D Regulation</a>
+              <a href="https://research.adamasuniversity.ac.in/phd-notification/" class="dd-item">Ph.D. Notification</a>
+            </div>
+          </div>
+          <div class="has-sub">
+            <span class="dd-item cursor-default">Postdoctoral Program (by Research) <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
+            <div class="sub-panel" role="region">
+              <a href="https://research.adamasuniversity.ac.in/regulations/" class="dd-item">Regulations</a>
+              <a href="#" class="dd-item">Award Letters</a>
+              <a href="https://research.adamasuniversity.ac.in/notification/" class="dd-item">Notification</a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- Research Center -->
+      <li class="has-dropdown" role="none">
+        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">
+          Research Center <i class="fa-solid fa-chevron-down chevron"></i>
+        </a>
+        <div class="dropdown-panel align-right" style="min-width:290px;" role="region" aria-label="Research Center submenu">
+          <div class="has-sub">
+            <span class="dd-item cursor-default">Centre for Incubation <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
+            <div class="sub-panel left-side" role="region">
+              <a href="https://research.adamasuniversity.ac.in/innosprout-private-ltd/" class="dd-item">INNOSPROUT PRIVATE LTD</a>
+            </div>
+          </div>
+          <div class="has-sub">
+            <span class="dd-item cursor-default">Centre for Research &amp; Innovation (CRI) <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
+            <div class="sub-panel left-side" style="min-width:300px;" role="region">
+              <a href="#" class="dd-item">Centre for High-End Computing and Research</a>
+              <a href="https://research.adamasuniversity.ac.in/maharshi-krishna-deb/" class="dd-item">Subhash Mukhopadhyay Centre for Stem Cell Biology</a>
+              <a href="https://research.adamasuniversity.ac.in/dr-debarun-roy-roy-lab/" class="dd-item">Dr. Debarun Roy (Roy Lab)</a>
+              <a href="https://research.adamasuniversity.ac.in/msc-in-clinical-embryology/" class="dd-item">MSc in Clinical Embryology</a>
+              <a href="#" class="dd-item">Centre for Research in Business Analytics</a>
+              <a href="#" class="dd-item">Centre for Education, Research and Development</a>
+              <a href="#" class="dd-item">Centre for Material Research</a>
+              <a href="#" class="dd-item">Centre for Water and Air Analysis</a>
+            </div>
+          </div>
+          <a href="#" class="dd-item">Intellectual Property Right Cell</a>
+          <a href="#" class="dd-item">Outreach and Consultancy Cell</a>
+          <div class="has-sub">
+            <span class="dd-item cursor-default">AIU Academic Administrative Dev. Centre <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
+            <div class="sub-panel left-side" role="region">
+              <a href="https://research.adamasuniversity.ac.in/aadc/" class="dd-item">AADC</a>
+            </div>
+          </div>
+          <a href="#" class="dd-item">Centre for Study of Contemporary Theory and Research</a>
+          <a href="#" class="dd-item">Centre of Excellence on Agro-Technology and Rural Dev.</a>
+          <a href="https://research.adamasuniversity.ac.in/rekhi-centre-of-excellence-for-the-science-of-happiness/" class="dd-item">Rekhi Centre of Excellence for the Science of Happiness</a>
+        </div>
+      </li>
+
+    </ul><!-- /nav-desktop -->
+
+    <!-- Right side -->
+    <div class="flex items-center gap-3 shrink-0">
+      <!-- Mobile toggle -->
+      <button id="mob-toggle" class="nav-link flex lg:hidden items-center justify-center w-10 h-10 rounded-md hover:bg-white/10 transition-colors"
+        aria-label="Open navigation menu" aria-expanded="false" aria-controls="mob-drawer">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ──────────────── MOBILE DRAWER ──────────────── -->
+<div id="mob-overlay" aria-hidden="true"></div>
+<div id="mob-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+  <!-- Header -->
+  <div class="flex items-center justify-between p-4 bg-[#005aab]">
+    <a href="https://research.adamasuniversity.ac.in/" tabindex="0">
+      <img src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/16141918/logo1.png" alt="Adamas University" class="h-10 w-auto" />
+    </a>
+    <button id="drawer-close" class="text-white/80 hover:text-white w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" aria-label="Close navigation menu">
+      <i class="fa-solid fa-xmark text-xl"></i>
+    </button>
+  </div>
+  <!-- Search in drawer -->
+  <div class="p-4 border-b border-gray-100">
+    <form role="search" method="get" action="https://research.adamasuniversity.ac.in/" class="flex border border-gray-200 rounded-lg overflow-hidden">
+      <label for="mob-search" class="sr-only">Search</label>
+      <input id="mob-search" type="text" name="s" placeholder="Search…" class="flex-1 px-4 py-2 text-sm outline-none" />
+      <button type="submit" class="px-4 py-2 bg-[#005aab] text-white" aria-label="Submit search"><i class="fa-solid fa-magnifying-glass text-sm"></i></button>
+    </form>
+  </div>
+  <!-- Nav -->
+  <nav aria-label="Mobile navigation">
+    <!-- Research -->
+    <button class="mob-acc-btn" data-acc="m-research" aria-expanded="false">Research <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
+    <div class="mob-acc-panel" id="m-research">
+      <a href="https://research.adamasuniversity.ac.in/policy/" class="mob-link">Policy</a>
+      <a href="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2022/06/07052324/Policy-on-Promotion-of-Academic-Integrity-and-Prevention-of-Plagiarism.pdf" class="mob-link" target="_blank" rel="noopener">Code of Ethics for Research</a>
+      <a href="#" class="mob-link">Collaboration</a>
+      <a href="https://auaicoe.in/other-centres-of-excellence/" class="mob-link" target="_blank" rel="noopener">Centres of Excellence</a>
+      <div class="mob-link section-head">Departmental Research</div>
+      <a href="https://science.adamasuniversity.ac.in/chemistry/" class="mob-link l2">SOBAS — Chemistry, Env Science, Physics…</a>
+      <a href="https://business.adamasuniversity.ac.in/department-of-commerce/" class="mob-link l2">SOBE — Commerce, Economics, Management</a>
+      <a href="https://education.adamasuniversity.ac.in/department-of-education/" class="mob-link l2">School of Education (SOE)</a>
+      <a href="https://engineering.adamasuniversity.ac.in/department-of-civil-engineering/" class="mob-link l2">SOET — Civil, CSE, ECE, Electrical, Mechanical</a>
+      <a href="https://law.adamasuniversity.ac.in/department-of-law/" class="mob-link l2">School of Law &amp; Justice (SOLJ)</a>
+      <a href="https://social-sciences.adamasuniversity.ac.in/bengali-language-and-literature/" class="mob-link l2">SOLACS — Bengali, English, History, Sociology…</a>
+      <a href="https://biotechnology.adamasuniversity.ac.in/department-of-biotechnology/" class="mob-link l2">SOLB — Biochemistry, Biotechnology, Microbiology</a>
+      <a href="https://media.adamasuniversity.ac.in/department-of-journalism-and-mass-communication/" class="mob-link l2">SOMC — Journalism, Communication, Media</a>
+      <a href="https://medical-studies.adamasuniversity.ac.in/department-of-pharmaceutical-technology/" class="mob-link l2">School of Medical Sciences — Pharmacy</a>
+      <a href="https://smart-agriculture.adamasuniversity.ac.in/agriculture/" class="mob-link l2">School of Smart Agriculture (SOSA)</a>
+    </div>
+
+    <!-- Infrastructure -->
+    <button class="mob-acc-btn" data-acc="m-infra" aria-expanded="false">Infrastructure <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
+    <div class="mob-acc-panel" id="m-infra">
+      <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="mob-link">Central Instrumentation Facility</a>
+    </div>
+
+    <!-- Publication & Patent -->
+    <button class="mob-acc-btn" data-acc="m-pub" aria-expanded="false">Publication &amp; Patent <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
+    <div class="mob-acc-panel" id="m-pub">
+      <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="mob-link">Published Research Papers</a>
+      <a href="https://research.adamasuniversity.ac.in/publications/" class="mob-link">Journals</a>
+      <a href="https://research.adamasuniversity.ac.in/book/" class="mob-link">Books / Chapters</a>
+      <a href="https://research.adamasuniversity.ac.in/patents/" class="mob-link">Patents</a>
+      <div class="mob-link section-head">Adamas Technical Review</div>
+      <a href="https://research.adamasuniversity.ac.in/volume-2-issue-2/" class="mob-link l2">Volume 2 Issue 2</a>
+      <a href="https://research.adamasuniversity.ac.in/volume-2-issue-1/" class="mob-link l2">Volume 2 Issue 1</a>
+    </div>
+
+    <!-- Funded Projects -->
+    <button class="mob-acc-btn" data-acc="m-funded" aria-expanded="false">Funded Projects <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
+    <div class="mob-acc-panel" id="m-funded">
+      <a href="https://research.adamasuniversity.ac.in/extramural/" class="mob-link">Extramural</a>
+    </div>
+
+    <!-- Research Program -->
+    <button class="mob-acc-btn" data-acc="m-prog" aria-expanded="false">Research Program <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
+    <div class="mob-acc-panel" id="m-prog">
+      <div class="mob-link section-head">Ph.D. Program</div>
+      <a href="https://research.adamasuniversity.ac.in/empaneled-supervisor/" class="mob-link l2">Empaneled Supervisor</a>
+      <a href="https://research.adamasuniversity.ac.in/phd-active-students-list-2015-2024/" class="mob-link l2">Ph.D Enrolled Scholars</a>
+      <a href="https://research.adamasuniversity.ac.in/ph-d-award-letters/" class="mob-link l2">Ph.D. Award Letters</a>
+      <a href="https://research.adamasuniversity.ac.in/ph-d-regulations/" class="mob-link l2">Ph.D Regulation</a>
+      <a href="https://research.adamasuniversity.ac.in/phd-notification/" class="mob-link l2">Ph.D. Notification</a>
+      <div class="mob-link section-head">Postdoctoral Program (by Research)</div>
+      <a href="https://research.adamasuniversity.ac.in/regulations/" class="mob-link l2">Regulations</a>
+      <a href="#" class="mob-link l2">Award Letters</a>
+      <a href="https://research.adamasuniversity.ac.in/notification/" class="mob-link l2">Notification</a>
+    </div>
+
+    <!-- Research Center -->
+    <button class="mob-acc-btn" data-acc="m-center" aria-expanded="false">Research Center <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
+    <div class="mob-acc-panel" id="m-center">
+      <a href="https://incubation.adamasuniversity.ac.in" class="mob-link">Centre for Incubation</a>
+      <a href="https://research.adamasuniversity.ac.in/innosprout-private-ltd/" class="mob-link l2">INNOSPROUT PRIVATE LTD</a>
+      <a href="#" class="mob-link">Centre for Research &amp; Innovation (CRI)</a>
+      <a href="#" class="mob-link l2">Centre for High-End Computing and Research</a>
+      <a href="https://research.adamasuniversity.ac.in/maharshi-krishna-deb/" class="mob-link l2">Subhash Mukhopadhyay Centre (Stem Cell Biology)</a>
+      <a href="https://research.adamasuniversity.ac.in/dr-debarun-roy-roy-lab/" class="mob-link l2">Dr. Debarun Roy (Roy Lab)</a>
+      <a href="https://research.adamasuniversity.ac.in/msc-in-clinical-embryology/" class="mob-link l2">MSc in Clinical Embryology</a>
+      <a href="#" class="mob-link l2">Centre for Research in Business Analytics</a>
+      <a href="#" class="mob-link l2">Centre for Education, Research and Development</a>
+      <a href="#" class="mob-link l2">Centre for Material Research</a>
+      <a href="#" class="mob-link l2">Centre for Water and Air Analysis</a>
+      <a href="#" class="mob-link">Intellectual Property Right Cell</a>
+      <a href="#" class="mob-link">Outreach and Consultancy Cell</a>
+      <a href="https://research.adamasuniversity.ac.in/aadc/" class="mob-link">AIU Academic Administrative Development Centre (AADC)</a>
+      <a href="#" class="mob-link">Centre for Study of Contemporary Theory and Research</a>
+      <a href="#" class="mob-link">Centre of Excellence on Agro-Technology and Rural Development</a>
+      <a href="https://research.adamasuniversity.ac.in/rekhi-centre-of-excellence-for-the-science-of-happiness/" class="mob-link">Rekhi Centre of Excellence for the Science of Happiness</a>
+    </div>
+
+    <!-- News & Events separator -->
+    <div class="border-t border-gray-200 mt-1">
+      <button class="mob-acc-btn" data-acc="m-news" aria-expanded="false">News &amp; Events <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
+      <div class="mob-acc-panel" id="m-news">
+        <a href="https://research.adamasuniversity.ac.in/anveshan/" class="mob-link">Anveshan</a>
+        <a href="https://research.adamasuniversity.ac.in/circular-and-notifications/" class="mob-link">Circular and Notifications</a>
+        <a href="#" class="mob-link">Annual Report 2020-21</a>
+        <a href="https://research.adamasuniversity.ac.in/seminars-webinar-fdp/" class="mob-link">Seminars / Webinar / FDP</a>
+      </div>
+      <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="mob-acc-btn" style="text-decoration:none;">Career</a>
+      <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="mob-acc-btn" style="text-decoration:none;">Central Instrumentation Facility</a>
+    </div>
+  </nav>
+  <!-- Drawer CTA -->
+  <div class="p-5 mt-2 border-t border-gray-100 flex flex-col gap-3">
+    <a href="https://adamasuniversity.nopaperforms.com" class="block w-full text-center bg-[#005aab] text-white font-semibold text-sm py-3 rounded-xl hover:bg-[#003d73] transition-colors">Apply for Admission</a>
+    <a href="https://adamasuniversity.ac.in/enquire-now/" class="block w-full text-center border border-[#005aab] text-[#005aab] font-semibold text-sm py-3 rounded-xl hover:bg-[#f0f7ff] transition-colors">Enquire Now</a>
+  </div>
+</div>
+
+<!-- ──────────────── HERO SLIDER ──────────────── -->
+<section id="hero" aria-label="Featured research highlights slider" tabindex="0">
+
+  <!-- Slide 1: Welcome To Adamas University -->
+  <div class="slide active" style="background-image:url('//s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/22102301/banner-23.jpg');" role="img" aria-label="Welcome To Adamas University">
+    <div class="slide-overlay"></div>
+    <div class="slide-body" id="details_div">
+      <p class="slide-label">Adamas University</p>
+      <h2 class="slide-heading">Welcome To<br>Adamas University</h2>
+      <p class="slide-desc">Fostering a culture of discovery, innovation, and academic excellence across all disciplines of knowledge.</p>
+      <a href="#content" class="slide-cta" id="hero-cta-1">Learn More <i class="fa-solid fa-chevron-right text-xs"></i></a>
+    </div>
+  </div>
+
+  <!-- Slide 2: Latest Research Publications -->
+  <div class="slide" style="background-image:url('//s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/22113137/publication_banner.jpg');" role="img" aria-label="Latest Research Publications">
+    <div class="slide-overlay"></div>
+    <div class="slide-body">
+      <p class="slide-label">Research Publications</p>
+      <h2 class="slide-heading">Latest Research<br>Publications</h2>
+      <p class="slide-desc">Explore groundbreaking research papers, journals, and books published by Adamas University scholars.</p>
+      <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="slide-cta">View Publications <i class="fa-solid fa-chevron-right text-xs"></i></a>
+    </div>
+  </div>
+
+  <!-- Slide 3: Latest Vacancies -->
+  <div class="slide" style="background-image:url('//s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/22113936/vacan.jpg');" role="img" aria-label="Latest Vacancies">
+    <div class="slide-overlay"></div>
+    <div class="slide-body">
+      <p class="slide-label">Career Opportunities</p>
+      <h2 class="slide-heading">Latest<br>Vacancies</h2>
+      <p class="slide-desc">Join our world-class research community. Explore open positions, fellowships, and academic opportunities.</p>
+      <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="slide-cta">View Openings <i class="fa-solid fa-chevron-right text-xs"></i></a>
+    </div>
+  </div>
+
+  <!-- Slide 4: Latest News & Events -->
+  <div class="slide" style="background-image:url('//s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/22102819/banner-3.jpg');" role="img" aria-label="Latest News and Events">
+    <div class="slide-overlay"></div>
+    <div class="slide-body">
+      <p class="slide-label">Stay Connected</p>
+      <h2 class="slide-heading">Latest News<br>&amp; Events</h2>
+      <p class="slide-desc">Seminars, webinars, FDP programs, and the latest happenings at Adamas University Research.</p>
+      <a href="https://research.adamasuniversity.ac.in/seminars-webinar-fdp/" class="slide-cta">News &amp; Events <i class="fa-solid fa-chevron-right text-xs"></i></a>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="sl-arrow sl-prev" id="sl-prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="sl-arrow sl-next" id="sl-next" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+
+  <div class="sl-dots" role="tablist" aria-label="Slide indicators">
+    <button class="sl-dot active" role="tab" aria-label="Slide 1" aria-selected="true" data-slide="0"></button>
+    <button class="sl-dot" role="tab" aria-label="Slide 2" aria-selected="false" data-slide="1"></button>
+    <button class="sl-dot" role="tab" aria-label="Slide 3" aria-selected="false" data-slide="2"></button>
+    <button class="sl-dot" role="tab" aria-label="Slide 4" aria-selected="false" data-slide="3"></button>
+  </div>
+</section>
+
+<!-- ──────────────── UNIVERSITY RESEARCH INTRO ──────────────── -->
+<section id="content" class="py-24 bg-white" aria-labelledby="intro-h1">
+  <div class="max-w-[1280px] mx-auto px-6 text-center">
+    <div class="reveal">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-[#1f7ae0] mb-5">Adamas University</span>
+      <h1 id="intro-h1" class="font-serif text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight">University Research</h1>
+      <div class="w-14 h-[3px] bg-[#005aab] mx-auto mb-8 rounded-full"></div>
+      <p class="text-lg sm:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed">
+        From Prize winners to undergraduates, all members of the Adamas University community are engaged in creating new knowledge.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── STATS STRIP ──────────────── -->
+<section class="py-16 bg-[#005aab]" aria-label="Research at a glance statistics">
+  <div class="max-w-[1280px] mx-auto px-6">
+    <div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/20">
+
+      <div class="text-center px-8 py-10 reveal">
+        <div class="stat-val" aria-label="14 Interdisciplinary Centres">14</div>
+        <div class="w-10 h-[2px] bg-white/30 mx-auto my-4 rounded-full"></div>
+        <div class="text-white/70 text-sm font-medium uppercase tracking-widest">Interdisciplinary Centres</div>
+      </div>
+
+      <div class="text-center px-8 py-10 reveal reveal-d1">
+        <div class="stat-val" aria-label="10 Schools With Various Departments">10</div>
+        <div class="w-10 h-[2px] bg-white/30 mx-auto my-4 rounded-full"></div>
+        <div class="text-white/70 text-sm font-medium uppercase tracking-widest">Schools With Various Departments</div>
+      </div>
+
+      <div class="text-center px-8 py-10 reveal reveal-d2">
+        <div class="stat-val" style="font-size:clamp(1.9rem,4vw,3rem);" aria-label="Over 14 Crore INR Research Grant">Over 14 Crore</div>
+        <div class="text-white/50 text-sm font-medium">(INR)</div>
+        <div class="w-10 h-[2px] bg-white/30 mx-auto my-4 rounded-full"></div>
+        <div class="text-white/70 text-sm font-medium uppercase tracking-widest">Research Grant Received from Govt. and Internal Funding</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── THE RESEARCH ENTERPRISE ──────────────── -->
+<section class="py-28 bg-[#f8fafc]" aria-labelledby="enterprise-heading">
+  <div class="max-w-[1280px] mx-auto px-6">
+
+    <!-- Section header -->
+    <div class="text-center mb-20 reveal">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-[#1f7ae0] mb-5">Our Mission</span>
+      <h2 id="enterprise-heading" class="font-serif text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight">The Research Enterprise</h2>
+      <div class="w-14 h-[3px] bg-[#005aab] mx-auto mb-8 rounded-full"></div>
+      <p class="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed">
+        Adamas's culture of collaboration drives innovative discoveries in areas vital to our world, our health and our intellectual life.
+      </p>
+    </div>
+
+    <!-- Image + Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+
+      <!-- Left: Image -->
+      <div class="reveal-l">
+        <div class="img-zoom rounded-2xl shadow-2xl border border-white/60" style="box-shadow:0 32px 80px rgba(0,0,0,0.14);">
+          <img
+            src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17053854/AU-212-1-1-scaled-e1612858008321.jpg"
+            alt="Adamas University Research Campus — state-of-the-art academic facilities"
+            class="w-full h-auto object-cover rounded-2xl"
+            loading="lazy" decoding="async"
+            width="1200" height="800"
+          />
+        </div>
+        <!-- Info card below image -->
+        <div class="mt-6 p-5 bg-white rounded-xl border border-gray-100 shadow-sm flex items-center gap-4">
+          <div class="w-11 h-11 rounded-full bg-[#005aab] flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-microscope text-white"></i>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800 text-sm leading-snug">World-Class Research Infrastructure</p>
+            <p class="text-gray-400 text-xs mt-1">State-of-the-art facilities supporting cutting-edge interdisciplinary research</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Research cards -->
+      <div class="flex flex-col gap-5 reveal-r">
+
+        <!-- Interdisciplinary Research -->
+        <div class="research-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-[#e8f0fb] flex items-center justify-center shrink-0 mt-0.5">
+              <i class="fa-solid fa-diagram-project text-[#005aab]"></i>
+            </div>
+            <div class="flex-1">
+              <h3>Interdisciplinary Research</h3>
+              <p>At the intersection of disciplines is where new ideas emerge and innovative research happens.</p>
+              <a href="#" class="jump-link">Adamas Interdisciplinary <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Institutes, Labs & Centers -->
+        <div class="research-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-[#e8f0fb] flex items-center justify-center shrink-0 mt-0.5">
+              <i class="fa-solid fa-flask text-[#005aab]"></i>
+            </div>
+            <div class="flex-1">
+              <h3>Institutes, Labs &amp; Centers</h3>
+              <p>Six independent labs, centers and institutes engage faculty and students from across the university.</p>
+              <a href="https://research.adamasuniversity.ac.in/centers/" target="_blank" rel="noopener">Independent Laboratories, Centers and Institutes <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Other Research Centers -->
+        <div class="research-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-[#e8f0fb] flex items-center justify-center shrink-0 mt-0.5">
+              <i class="fa-solid fa-building-columns text-[#005aab]"></i>
+            </div>
+            <div class="flex-1">
+              <h3>Other Research Centers &amp; Labs</h3>
+              <p>Academic departments sponsor numerous other research centers and labs.</p>
+              <a href="#" class="jump-link">Listing of Adamas Research Centers <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA row -->
+        <div class="flex flex-wrap gap-3 pt-3">
+          <a href="https://research.adamasuniversity.ac.in/published-research-papers/"
+             class="inline-flex items-center gap-2 bg-[#005aab] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#003d73] transition-colors shadow-sm">
+            <i class="fa-solid fa-file-lines text-xs"></i> Publications
+          </a>
+          <a href="https://research.adamasuniversity.ac.in/patents/"
+             class="inline-flex items-center gap-2 bg-white text-[#005aab] text-sm font-semibold px-5 py-2.5 rounded-lg border border-[#005aab] hover:bg-[#f0f7ff] transition-colors">
+            <i class="fa-solid fa-certificate text-xs"></i> Patents
+          </a>
+          <a href="https://research.adamasuniversity.ac.in/phd-notification/"
+             class="inline-flex items-center gap-2 bg-white text-[#005aab] text-sm font-semibold px-5 py-2.5 rounded-lg border border-[#005aab] hover:bg-[#f0f7ff] transition-colors">
+            <i class="fa-solid fa-graduation-cap text-xs"></i> Ph.D. Program
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── QUICK LINKS GRID ──────────────── -->
+<section class="py-16 bg-white border-t border-gray-100" aria-label="Quick navigation links">
+  <div class="max-w-[1280px] mx-auto px-6">
+    <div class="text-center mb-10 reveal">
+      <h2 class="text-xl font-bold text-gray-800">Explore Research at Adamas</h2>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 reveal reveal-d1">
+
+      <a href="https://research.adamasuniversity.ac.in/policy/" class="quick-link" aria-label="Research Policy">
+        <div class="ql-icon"><i class="fa-solid fa-file-shield"></i></div>
+        <span class="ql-label">Research Policy</span>
+      </a>
+      <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="quick-link" aria-label="Publications">
+        <div class="ql-icon"><i class="fa-solid fa-newspaper"></i></div>
+        <span class="ql-label">Publications</span>
+      </a>
+      <a href="https://research.adamasuniversity.ac.in/patents/" class="quick-link" aria-label="Patents">
+        <div class="ql-icon"><i class="fa-solid fa-certificate"></i></div>
+        <span class="ql-label">Patents</span>
+      </a>
+      <a href="https://research.adamasuniversity.ac.in/phd-notification/" class="quick-link" aria-label="Ph.D. Program">
+        <div class="ql-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <span class="ql-label">Ph.D. Program</span>
+      </a>
+      <a href="https://research.adamasuniversity.ac.in/extramural/" class="quick-link" aria-label="Funded Projects">
+        <div class="ql-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+        <span class="ql-label">Funded Projects</span>
+      </a>
+      <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="quick-link" aria-label="Central Instrumentation Facility">
+        <div class="ql-icon"><i class="fa-solid fa-microscope"></i></div>
+        <span class="ql-label">CIF</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── FOOTER ──────────────── -->
+<footer id="footer" role="contentinfo" aria-label="Site footer">
+  <div class="py-16">
+    <div class="max-w-[1280px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+      <!-- Col 1: Branding + Contact -->
+      <div>
+        <a href="https://research.adamasuniversity.ac.in/" aria-label="Home">
+          <img src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17141932/au-footer-logo.png"
+               alt="Adamas University" class="h-[72px] w-auto mb-6" loading="lazy" width="200" height="187" />
+        </a>
+        <div class="space-y-3 text-sm text-white/65 leading-relaxed">
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot mt-0.5 text-[#1f7ae0] shrink-0 text-base"></i>
+            <span>Barasat-Barrackpore Road, Barbaria, P.O Jagannathpur, District-24 Parganas (North), Kolkata-700 126, West Bengal, India</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-phone text-[#1f7ae0] shrink-0 text-base"></i>
+            <a href="tel:18004197423" class="hover:text-white transition-colors">1800 419 7423</a>
+          </div>
+        </div>
+        <p class="text-white/30 text-xs mt-6">© 2021 Adamas University. All rights reserved.</p>
+      </div>
+
+      <!-- Col 2: Adamas University Links -->
+      <div>
+        <h2 class="ft-head">Adamas University</h2>
+        <div class="space-y-0.5">
+          <a href="https://research.adamasuniversity.ac.in/policy/" class="ft-link">Research Policy</a>
+          <a href="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2022/06/07052324/Policy-on-Promotion-of-Academic-Integrity-and-Prevention-of-Plagiarism.pdf" class="ft-link" target="_blank" rel="noopener">Code of Ethics for Research</a>
+          <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="ft-link">Published Research Papers</a>
+          <a href="https://research.adamasuniversity.ac.in/publications/" class="ft-link">Journals</a>
+          <a href="https://research.adamasuniversity.ac.in/book/" class="ft-link">Books / Chapters</a>
+          <a href="https://research.adamasuniversity.ac.in/patents/" class="ft-link">Patents</a>
+          <a href="https://research.adamasuniversity.ac.in/extramural/" class="ft-link">Funded Projects (Extramural)</a>
+          <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="ft-link">Central Instrumentation Facility</a>
+        </div>
+      </div>
+
+      <!-- Col 3: News & Events + Research Programs -->
+      <div>
+        <h2 class="ft-head">News &amp; Events</h2>
+        <div class="space-y-0.5 mb-8">
+          <a href="https://research.adamasuniversity.ac.in/anveshan/" class="ft-link">Anveshan</a>
+          <a href="https://research.adamasuniversity.ac.in/circular-and-notifications/" class="ft-link">Circular and Notifications</a>
+          <a href="#" class="ft-link">Annual Report 2020-21</a>
+          <a href="https://research.adamasuniversity.ac.in/seminars-webinar-fdp/" class="ft-link">Seminars / Webinar / FDP</a>
+          <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="ft-link">Career</a>
+        </div>
+        <h2 class="ft-head">Research Programs</h2>
+        <div class="space-y-0.5">
+          <a href="https://research.adamasuniversity.ac.in/empaneled-supervisor/" class="ft-link">Empaneled Supervisor</a>
+          <a href="https://research.adamasuniversity.ac.in/phd-active-students-list-2015-2024/" class="ft-link">Ph.D Enrolled Scholars</a>
+          <a href="https://research.adamasuniversity.ac.in/ph-d-award-letters/" class="ft-link">Ph.D. Award Letters</a>
+          <a href="https://research.adamasuniversity.ac.in/ph-d-regulations/" class="ft-link">Ph.D Regulation</a>
+          <a href="https://research.adamasuniversity.ac.in/phd-notification/" class="ft-link">Ph.D. Notification</a>
+        </div>
+      </div>
+
+      <!-- Col 4: Important Links + CTAs -->
+      <div>
+        <h2 class="ft-head">Important Links</h2>
+        <div class="space-y-0.5 mb-8">
+          <a href="https://adamasuniversity.nopaperforms.com" class="ft-link">Apply for Admission</a>
+          <a href="https://adamasuniversity.ac.in/enquire-now/" class="ft-link">Enquire Now</a>
+          <a href="https://aulibrary.adamasuniversity.ac.in/" class="ft-link">Library</a>
+          <a href="https://incubation.adamasuniversity.ac.in" class="ft-link">Centre for Incubation</a>
+          <a href="https://research.adamasuniversity.ac.in/aadc/" class="ft-link">AADC</a>
+          <a href="https://research.adamasuniversity.ac.in/rekhi-centre-of-excellence-for-the-science-of-happiness/" class="ft-link">Rekhi Centre of Excellence</a>
+          <a href="https://auaicoe.in/other-centres-of-excellence/" class="ft-link" target="_blank" rel="noopener">Centres of Excellence</a>
+        </div>
+        <a href="https://adamasuniversity.ac.in/enquire-now/"
+           class="flex items-center justify-center gap-2 border border-white/20 text-white/75 text-sm font-semibold py-3 px-5 rounded-xl hover:border-white hover:text-white transition-colors w-full mt-2">
+          <i class="fa-solid fa-circle-question"></i> Enquire Now
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-white/10 py-5">
+    <div class="max-w-[1280px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="https://research.adamasuniversity.ac.in/">
+        <img src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/16141918/logo1.png" alt="Research - Adamas University" class="h-9 w-auto" loading="lazy" width="200" height="70" />
+      </a>
+      <nav aria-label="Bottom navigation" class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+        <a href="https://research.adamasuniversity.ac.in/anveshan/" class="text-white/40 hover:text-white text-xs transition-colors">Anveshan</a>
+        <a href="https://research.adamasuniversity.ac.in/circular-and-notifications/" class="text-white/40 hover:text-white text-xs transition-colors">Circulars</a>
+        <a href="https://research.adamasuniversity.ac.in/seminars-webinar-fdp/" class="text-white/40 hover:text-white text-xs transition-colors">Seminars/Webinar/FDP</a>
+        <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="text-white/40 hover:text-white text-xs transition-colors">Career</a>
+        <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="text-white/40 hover:text-white text-xs transition-colors">Central Instrumentation Facility</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- NoPaperForms AI Agent (preserved from original) -->
+<div class="npf_ai_agents" data-w="3315d385b96340138ff3508a2c1e81c8" style="display:none;"></div>
+<script type="text/javascript">var s=document.createElement("script"); s.type="text/javascript"; s.async=true; s.src="https://widgets.nopaperforms.com/emwgts.js"; document.body.appendChild(s);</script>
+
+<!-- ──────────────── JAVASCRIPT ──────────────── -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Preloader ── */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var p = document.getElementById('preloader');
+      if (p) p.classList.add('done');
+    }, 280);
+  });
+
+  /* ── Navbar: shadow on scroll ── */
+  var navbar = document.getElementById('navbar');
+
+  function updateNav() {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  /* ── Hero Slider ── */
+  var slides  = document.querySelectorAll('.slide');
+  var dots    = document.querySelectorAll('.sl-dot');
+  var cur     = 0;
+  var timer   = null;
+
+  function activateSlide(idx) {
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    dots[cur].setAttribute('aria-selected', 'false');
+    cur = (idx + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    dots[cur].setAttribute('aria-selected', 'true');
+  }
+  function next() { activateSlide(cur + 1); }
+  function prev() { activateSlide(cur - 1); }
+  function startAuto() { timer = setInterval(next, 5500); }
+  function stopAuto()  { clearInterval(timer); }
+
+  document.getElementById('sl-next').addEventListener('click', function () { stopAuto(); next(); startAuto(); });
+  document.getElementById('sl-prev').addEventListener('click', function () { stopAuto(); prev(); startAuto(); });
+  dots.forEach(function (d, i) {
+    d.addEventListener('click', function () { stopAuto(); activateSlide(i); startAuto(); });
+  });
+
+  var hero = document.getElementById('hero');
+  hero.addEventListener('mouseenter', stopAuto);
+  hero.addEventListener('mouseleave', startAuto);
+  hero.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { stopAuto(); next(); startAuto(); }
+    if (e.key === 'ArrowLeft')  { stopAuto(); prev(); startAuto(); }
+  });
+  startAuto();
+
+  /* ── Mobile Drawer ── */
+  var overlay   = document.getElementById('mob-overlay');
+  var drawer    = document.getElementById('mob-drawer');
+  var toggleBtn = document.getElementById('mob-toggle');
+  var closeBtn  = document.getElementById('drawer-close');
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    toggleBtn.focus();
+  }
+
+  if (toggleBtn) toggleBtn.addEventListener('click', openDrawer);
+  if (closeBtn)  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+
+  /* ── Mobile Accordion ── */
+  document.querySelectorAll('.mob-acc-btn[data-acc]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('data-acc');
+      var panel    = document.getElementById(targetId);
+      var isOpen   = panel.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.mob-acc-panel').forEach(function (p) { p.classList.remove('open'); });
+      document.querySelectorAll('.mob-acc-btn[data-acc]').forEach(function (b) {
+        b.classList.remove('open');
+        b.setAttribute('aria-expanded', 'false');
+      });
+
+      // Open target if it was closed
+      if (!isOpen) {
+        panel.classList.add('open');
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ── Intersection Observer Reveals ── */
+  var revealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(function (el) {
+    revealObs.observe(el);
+  });
+
+
+
+  /* ── NoPaperForms AI Agent (deferred) ── */
+  setTimeout(function () {
+    var s = document.createElement('script');
+    s.type = 'text/javascript'; s.async = true;
+    s.src = 'https://mn12owkdyk.in1.agent.nopaperforms.com/en-gb/backend/agents/aiagentscpt.js/2455f35478c4c907/3315d385b96340138ff3508a2c1e81c8';
+    document.body.appendChild(s);
+  }, 8000);
+
+})();
+</script>
+
+</body>
+</html>
