@@ -1,0 +1,506 @@
+/* =============================================================
+   rekhi.css
+   Extracted from rekhi.html – all embedded <style> blocks
+   ============================================================= */
+
+/* ------------------------------------------------------------------
+   1. Slider Revolution placeholder  (was: #rs-plugin-settings-inline-css)
+   ------------------------------------------------------------------ */
+#rs-demo-id { display: block; /* slider revolution placeholder */ }
+
+/* ------------------------------------------------------------------
+   2. TablePress & DataTables  (was: #wp-custom-css)
+   ------------------------------------------------------------------ */
+#tablepress-2_wrapper,
+#tablepress-3_wrapper,
+#tablepress-6_wrapper,
+#tablepress-7_wrapper
+{
+	margin-left: -6.2% !important;
+    margin-right: -6.2% !important;
+}
+
+#tablepress-5_wrapper
+{
+	margin-left: -5.2% !important;
+    margin-right: -5.2% !important;
+}
+
+.dataTables_filter {
+    float: left !important;
+    white-space: nowrap !important;
+    margin-bottom: 20px !important;
+    color: black !important;
+}
+
+.tablepress tfoot th, .tablepress thead th {
+    background-color: #005aab !important;
+    color: white !important;
+}
+
+#tablepress-3 thead th
+{
+	width:15% !important;
+}
+
+#tablepress-3 thead .column-1
+{
+	width:5% !important;
+}
+
+#tablepress-2,#tablepress-3,#tablepress-6,#tablepress-7,#tablepress-5
+{
+	color:black !important;
+}
+
+#tablepress-3_filter
+{
+	margin-left: 10px !important;
+}
+
+.tablepress-id-5 thead th
+{
+	background-color: #005aab !important;
+	border-bottom: 1px solid #005aab !important;
+}
+
+#tablepress-5 tbody .row-2 td
+{
+	background-color:#005aab !important;
+	color:white !important;
+}
+
+.tablepress-id-7 .column-1
+{
+	width:5% !important;
+}
+
+.tablepress-id-7 .column-2
+{
+	width:35%;
+}
+.tablepress-id-7 .column-3
+{
+	width:15%;
+}
+
+.tablepress-id-7 .column-4
+{
+	width:20%;
+}
+.tablepress-id-7 .column-5
+{
+	width:25%;
+}
+
+@media only screen and (max-width: 600px) {
+  .tablepress-id-3,#tablepress-3 {
+    width: 1200px !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   3. Lightbox (WPR)  (was: #wpr_lightbox_styles)
+   ------------------------------------------------------------------ */
+.lg-backdrop {
+	background-color: rgba(0,0,0,0.6) !important;
+}
+.lg-toolbar,
+.lg-dropdown {
+	background-color: rgba(0,0,0,0.8) !important;
+}
+.lg-dropdown:after {
+	border-bottom-color: rgba(0,0,0,0.8) !important;
+}
+.lg-sub-html {
+	background-color: rgba(0,0,0,0.8) !important;
+}
+.lg-thumb-outer,
+.lg-progress-bar {
+	background-color: #444444 !important;
+}
+.lg-progress {
+	background-color: #a90707 !important;
+}
+.lg-icon {
+	color: #efefef !important;
+	font-size: 20px !important;
+}
+.lg-icon.lg-toogle-thumb {
+	font-size: 24px !important;
+}
+.lg-icon:hover,
+.lg-dropdown-text:hover {
+	color: #ffffff !important;
+}
+.lg-sub-html,
+.lg-dropdown-text {
+	color: #efefef !important;
+	font-size: 14px !important;
+}
+#lg-counter {
+	color: #efefef !important;
+	font-size: 14px !important;
+}
+.lg-prev,
+.lg-next {
+	font-size: 35px !important;
+}
+
+/* Defaults */
+.lg-icon {
+	background-color: transparent !important;
+}
+#lg-counter {
+	opacity: 0.9;
+}
+.lg-thumb-outer {
+	padding: 0 10px;
+}
+.lg-thumb-item {
+	border-radius: 0 !important;
+	border: none !important;
+	opacity: 0.5;
+}
+.lg-thumb-item.active {
+	opacity: 1;
+}
+
+/* ------------------------------------------------------------------
+   4. Theme custom / layout  (was: #the7-custom-inline-css)
+   ------------------------------------------------------------------ */
+#primary-menu
+{
+	padding-right: 27px !important;
+}
+
+.masthead
+{
+	position:fixed !important;
+	width:100% !important;
+	padding:0% 1.3% !important;
+}
+
+#phantom {
+    display: none !important;
+}
+
+#main
+{
+	z-index:1 !important;
+}
+
+@media only screen and (max-width: 700px) {
+
+	.all_sub_heading span
+	{
+		font-size: 14pt !important;
+		line-height: 1.5em!important;
+	}
+
+ .home_heading
+	{
+		margin-top:-50px !important;
+		padding:0% 2% !important;
+	}
+
+	.section_heading
+	{
+		padding:0% 2% !important;
+	}
+
+	.box_image
+	{
+		margin-right:0px !important;
+	}
+
+	.box_column
+	{
+		z-index: 999 !important;
+	}
+
+	.box_text
+	{
+		margin-left:0px !important;
+	}
+
+	.lib_box_text
+	{
+		margin-right:0px !important;
+	}
+
+	.lib_box_image
+	{
+		margin-left:0px !important;
+		z-index:999 !important;
+		margin-top:0px !important;
+	}
+
+	.box_text_col
+	{
+		margin-left:0px !important;
+	}
+}
+
+.home_heading
+{
+	margin-top:-130px;
+	padding:0% 10%;
+}
+
+.section_heading
+{
+	padding:0% 10%;
+}
+
+.box_image
+{
+	margin-right:-70px;
+}
+
+.box_column
+{
+	z-index: 999 !important;
+}
+
+.box_text
+{
+	margin-left:70px;
+}
+
+.lib_box_text
+{
+	margin-right:70px;
+}
+
+.lib_box_image
+{
+	margin-left:-70px;
+	z-index:999 !important;
+	margin-top:40px;
+}
+
+.box_text_col
+{
+	margin-left:30px;
+}
+
+#main {
+	padding-bottom:0px !important;
+}
+
+@media screen and (max-width: 778px)
+{
+	#top-menu li
+	{
+		border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 14px 0px;
+    color: white;
+	}
+
+	#top-menu li span
+	{
+	    color: white !important;
+	}
+
+	#top-menu .mini-sub-nav span
+	{
+		 color: black !important;
+		padding-left:2px !important;
+	}
+
+	.abc
+	{
+		width: 170px !important;
+    height: 90px !important;
+		margin-left: -70px !important;
+		margin-top:-70px !important;
+	}
+
+	.abc_head
+	{
+		margin-left: -70px !important;
+		line-height: 20px !important;
+    letter-spacing: 0px !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+		margin-top:-70px !important;
+	}
+
+	.abc_button
+	{
+		padding: 5px 6px !important;
+		font-size: 10px !important;
+		margin-left: -70px !important;
+		margin-top:-40px !important;
+	}
+}
+
+@media only screen and (max-width: 1320px) {
+  #primary-menu .menu-item
+	{
+		margin-right: -16px !important;
+	}
+}
+
+@media only screen and (max-width: 1198px) {
+  #primary-menu .menu-item
+	{
+		margin-right: -18px !important;
+	}
+}
+
+.page-title.solid-bg
+{
+	    margin-top: 113px !important;
+}
+
+@media only screen and (max-width: 600px) {
+ .page-title.solid-bg
+{
+	    margin-top: 0px !important;
+}
+}
+
+.black-list li {
+  color: black !important;
+}
+
+/* ------------------------------------------------------------------
+   5. Fancy-header / page-title bar  (was: inline <style> before <header>)
+   ------------------------------------------------------------------ */
+.fancy-header {
+  background-color: #005aab;
+}
+.fancy-header .wf-wrap {
+  display: -webkit-flex;
+  display: flex;
+  min-height: 110px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+.fancy-header .hgroup {
+  width: 100%;
+}
+.fancy-header.title-center .hgroup,
+.fancy-header.title-center .breadcrumbs {
+  text-align: center;
+}
+.fancy-header.title-left .hgroup {
+  text-align: left;
+}
+.fancy-header.title-left .breadcrumbs {
+  text-align: right;
+  float: right;
+}
+.fancy-header.title-right .hgroup {
+  text-align: right;
+}
+.fancy-header.title-right .breadcrumbs {
+  text-align: right;
+  float: none;
+  margin: 0;
+}
+.fancy-header .fancy-title,
+.fancy-header .fancy-subtitle {
+  line-height: normal;
+}
+.fancy-header .fancy-title {
+  font-size: 36px;
+  line-height: 44px;
+  text-transform: none;
+}
+.fancy-header .fancy-subtitle {
+  font-size: 24px;
+  line-height: 32px;
+  text-transform: none;
+}
+.fancy-header .breadcrumbs {
+  color: #ffffff;
+}
+.fancy-header-overlay {
+  background: rgba(0,0,0,0.5);
+}
+
+@media screen and (max-width: 778px) {
+  .fancy-header .wf-wrap {
+    min-height: 70px;
+  }
+  .fancy-header .fancy-title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  .fancy-header .fancy-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .fancy-header.breadcrumbs-mobile-off .breadcrumbs {
+    display: none;
+  }
+  #fancy-header > .wf-wrap {
+    -webkit-flex-flow: column wrap;
+    flex-flow: column wrap;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding-bottom: 0px !important;
+  }
+  .fancy-header.title-left .breadcrumbs {
+    text-align: center;
+    float: none;
+  }
+  .breadcrumbs {
+    margin-bottom: 10px;
+  }
+  .breadcrumbs.breadcrumbs-bg {
+    margin-top: 10px;
+  }
+  .fancy-header.title-right .breadcrumbs {
+    margin: 10px 0 10px 0;
+  }
+  #fancy-header .hgroup,
+  #fancy-header .breadcrumbs {
+    text-align: center;
+  }
+  .fancy-header .hgroup {
+    padding-bottom: 5px;
+  }
+  .breadcrumbs-off .hgroup {
+    padding-bottom: 5px;
+  }
+  .title-right .hgroup {
+    padding: 0 0 5px 0;
+  }
+  .title-right.breadcrumbs-off .hgroup {
+    padding-top: 5px;
+  }
+  .title-left.disabled-bg .breadcrumbs {
+    margin-bottom: 0;
+  }
+}
+
+/* ------------------------------------------------------------------
+   6. Select2 / form  (was: inline <style> in #main)
+   ------------------------------------------------------------------ */
+.form-control-country span.select2-container {
+	width: 100% !important;
+}
+
+/* ------------------------------------------------------------------
+   7. Footer link list  (was: inline <style> inside footer widget)
+   ------------------------------------------------------------------ */
+.link li {
+    list-style: none;
+	padding: 3px 0px !important;
+}
+.link li::before {
+    content: "\00BB";
+	font-size: 16px;
+}
