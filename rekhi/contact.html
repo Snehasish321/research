@@ -2,30 +2,24 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#005aab"/>
   <title>Contact Us — Rekhi Centre of Excellence for the Science of Happiness</title>
   <meta name="description" content="Get in touch with the Rekhi Centre of Excellence for the Science of Happiness at Adamas University for programmes, collaborations and activities.">
-  <link rel='stylesheet' href='https://research.adamasuniversity.ac.in/wp-content/themes/dt-the7/css/main.min.css' type='text/css' media='all' />
-  <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700|Cinzel:400,600,700' type='text/css' media='all' />
-  <link rel="stylesheet" href="styles.css">
-
+  <script src="header-footer.js"></script>
   <style>
-    /* Contact page extra animations */
+    /* Contact page: staggered slide-in animation */
     .contact-hero-card .contact-row {
       opacity: 0;
       transform: translateX(-18px);
       animation: slideIn 0.5s ease forwards;
     }
-    .contact-hero-card .contact-row:nth-child(1) { animation-delay: 0.1s; }
-    .contact-hero-card .contact-row:nth-child(2) { animation-delay: 0.22s; }
-    .contact-hero-card .contact-row:nth-child(3) { animation-delay: 0.34s; }
-    .contact-hero-card .contact-row:nth-child(4) { animation-delay: 0.46s; }
-    @keyframes slideIn {
-      to { opacity: 1; transform: translateX(0); }
-    }
+    .contact-hero-card .contact-row:nth-child(2) { animation-delay: 0.1s; }
+    .contact-hero-card .contact-row:nth-child(3) { animation-delay: 0.2s; }
+    .contact-hero-card .contact-row:nth-child(4) { animation-delay: 0.3s; }
+    .contact-hero-card .contact-row:nth-child(5) { animation-delay: 0.4s; }
+    @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
     .map-placeholder {
-      width: 100%;
       height: 280px;
       border-radius: 10px;
       overflow: hidden;
@@ -34,24 +28,9 @@
     }
   </style>
 </head>
-<body data-rsssl=1 class="page-template-default page page-id-2318 wp-embed-responsive the7-core-ver-2.4.0 fancy-header-on dt-responsive-on the7-ver-7.8.0">
-<div id="load" class="spinner-loader"><div class="load-wrap"></div></div>
+<body>
+
 <div id="page">
-  <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
-
-  <div class="masthead inline-header right widgets full-height full-width shadow-decoration small-mobile-menu-icon dt-parent-menu-clickable show-mobile-logo" role="banner">
-    <div class="top-bar full-width-line top-bar-line-hide"><div class="top-bar-bg"></div></div>
-    <header class="header-bar">
-      <div class="branding">
-        <a href="https://research.adamasuniversity.ac.in/"><img class="preload-me" src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/20063958/logo_601.png" width="200" height="60" alt="Research - Adamas University" /></a>
-      </div>
-      <ul id="primary-menu" class="main-nav underline-decoration l-to-r-line outside-item-remove-margin" role="navigation">
-        <li class="menu-item first"><a href='https://research.adamasuniversity.ac.in/'><span class="menu-text">Research</span></a></li>
-        <li class="menu-item act"><a href='#'><span class="menu-text">Research Center</span></a></li>
-      </ul>
-    </header>
-  </div>
-
   <!-- Hero -->
   <div class="rekhi-hero">
     <img class="rekhi-hero-logo" src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/20063958/logo_601.png" alt="Adamas University">
@@ -96,30 +75,22 @@
 
         <!-- Left: Contact Details -->
         <div>
-          <!-- Hero Contact Card -->
           <div class="contact-hero-card">
             <div style="font-size:1.15rem;font-weight:700;margin-bottom:24px;letter-spacing:0.5px;">Get In Touch</div>
-
             <div class="contact-row">
               <div class="contact-icon-wrap">📧</div>
               <div>
                 <div class="contact-label">Email</div>
-                <div class="contact-val">
-                  <a href="mailto:rekhi-centre.au@adamasuniversity.ac.in">rekhi-centre.au@adamasuniversity.ac.in</a>
-                </div>
+                <div class="contact-val"><a href="mailto:rekhi-centre.au@adamasuniversity.ac.in">rekhi-centre.au@adamasuniversity.ac.in</a></div>
               </div>
             </div>
-
             <div class="contact-row">
               <div class="contact-icon-wrap">📞</div>
               <div>
                 <div class="contact-label">Call / WhatsApp</div>
-                <div class="contact-val">
-                  <a href="tel:+919674252647">+91 9674252647</a>
-                </div>
+                <div class="contact-val"><a href="tel:+919674252647">+91 9674252647</a></div>
               </div>
             </div>
-
             <div class="contact-row">
               <div class="contact-icon-wrap">👤</div>
               <div>
@@ -127,7 +98,6 @@
                 <div class="contact-val">Dr. Anu Rai</div>
               </div>
             </div>
-
             <div class="contact-row">
               <div class="contact-icon-wrap">🏛️</div>
               <div>
@@ -137,7 +107,6 @@
             </div>
           </div>
 
-          <!-- Person Card -->
           <div class="contact-person-card">
             <div class="contact-person-avatar">👤</div>
             <div>
@@ -146,7 +115,6 @@
             </div>
           </div>
 
-          <!-- Rekhi Foundation Button -->
           <a class="btn-foundation" href="https://rekhifoundation.com/" target="_blank" rel="noopener">
             🌐 Know more about Rekhi Foundation, USA <span style="font-size:0.8rem;">↗</span>
           </a>
@@ -154,7 +122,6 @@
 
         <!-- Right: Address + Map -->
         <div>
-          <!-- Address Card -->
           <div class="contact-addr-card mb-8">
             <div class="contact-addr-icon">📍</div>
             <div>
@@ -165,7 +132,6 @@
             </div>
           </div>
 
-          <!-- University Address Card -->
           <div class="contact-addr-card mb-8">
             <div class="contact-addr-icon">🏫</div>
             <div>
@@ -177,7 +143,6 @@
             </div>
           </div>
 
-          <!-- Embedded Map -->
           <div class="map-placeholder">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3676.714348764903!2d88.44290871543907!3d22.74462148508607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89e46df9e4ed7%3A0xea96be0e04f37609!2sAdamas%20University!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"
@@ -191,18 +156,7 @@
     </main>
   </div>
 
-  <footer id="footer" class="footer solid-bg">
-    <div class="wf-wrap"><div class="wf-container-footer"><div class="wf-container">
-      <section class="widget widget_text wf-cell wf-1-4"><div class="textwidget"><p><img loading="lazy" src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17141932/au-footer-logo.png" alt="" width="200" height="187"/></p></div></section>
-      <section class="widget widget_text wf-cell wf-1-4"><div class="widget-title">Adamas University</div><div class="textwidget"><ul>
-        <li style="color:white"><b>Address: </b>Barasat-Barrackpore Road, Barbaria, Kolkata-700 126, West Bengal, India</li>
-        <li style="color:white"><b>Phone No: </b>1800 419 7423</li>
-        <li style="color:white">© 2021 Adamas University. All rights reserved.</li>
-      </ul></div></section>
-    </div></div></div>
-  </footer>
-</div>
-<script src="https://research.adamasuniversity.ac.in/wp-includes/js/jquery/jquery.min.js"></script>
-<script src="https://research.adamasuniversity.ac.in/wp-content/themes/dt-the7/js/main.min.js"></script>
+</div><!-- #page -->
+
 </body>
 </html>
