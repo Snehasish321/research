@@ -1,472 +1,610 @@
 /*!
- * header-footer.js — Rekhi Centre sub-pages
- * Injects the full modern header (top-bar + navbar + mobile drawer)
- * and footer into every rekhi/ page. All pages need only include:
+ * header-footer.js — Rekhi Centre of Excellence v2.0
+ * ─────────────────────────────────────────────────────────
+ * Injects:
+ *   • Floating glassmorphic Rekhi-scoped navigation
+ *   • Enterprise footer (pure CSS, no Tailwind)
+ *   • Scroll-to-top button
+ *   • GSAP entrance + ScrollTrigger reveal animations
+ *
+ * Each rekhi/ page only needs:
  *   <script src="header-footer.js"></script>
- * in their <head>.
+ * ─────────────────────────────────────────────────────────
  */
 (function () {
+  'use strict';
 
-  /* ─────────────────────────────────────────────────────────────
-     1. Inject external dependencies into <head>
-     ───────────────────────────────────────────────────────────── */
-  function addLink(rel, href, extra) {
+  /* ═══════════════════════════════════════════════════════
+     1. DOM UTILITY HELPERS
+     ═══════════════════════════════════════════════════════ */
+  function addLink(rel, href, attrs) {
     var el = document.createElement('link');
-    el.rel = rel; el.href = href;
-    if (extra) Object.assign(el, extra);
+    el.rel  = rel;
+    el.href = href;
+    if (attrs) {
+      Object.keys(attrs).forEach(function (k) { el[k] = attrs[k]; });
+    }
     document.head.appendChild(el);
   }
-  function addScript(src) {
+
+  function loadScript(src, cb) {
     var el = document.createElement('script');
-    el.src = src; document.head.appendChild(el);
+    el.src = src;
+    if (cb) el.onload = cb;
+    el.onerror = function () {
+      console.warn('[Rekhi] Failed to load script: ' + src);
+    };
+    document.head.appendChild(el);
+    return el;
   }
+
+  /* ═══════════════════════════════════════════════════════
+     2. HEAD DEPENDENCIES
+     ═══════════════════════════════════════════════════════ */
 
   /* Favicon */
   addLink('icon', 'https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17163552/cropped-au-footer-logo.png', { sizes: '32x32' });
 
   /* Google Fonts preconnect */
   addLink('preconnect', 'https://fonts.googleapis.com');
-  var gc = document.createElement('link');
-  gc.rel = 'preconnect'; gc.href = 'https://fonts.gstatic.com'; gc.crossOrigin = 'anonymous';
-  document.head.appendChild(gc);
+  var _gc = document.createElement('link');
+  _gc.rel = 'preconnect';
+  _gc.href = 'https://fonts.gstatic.com';
+  _gc.crossOrigin = 'anonymous';
+  document.head.appendChild(_gc);
 
-  /* Google Fonts */
-  addLink('stylesheet', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600&display=swap');
+  /* Inter + Cinzel typography */
+  addLink('stylesheet',
+    'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cinzel:wght@600&display=swap'
+  );
 
-  /* Font Awesome 6 */
-  addLink('stylesheet', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+  /* Font Awesome 6 icons */
+  addLink('stylesheet',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css'
+  );
 
-  /* Tailwind CSS */
-  var tw = document.createElement('script');
-  tw.src = 'https://cdn.tailwindcss.com';
-  document.head.appendChild(tw);
-
-  /* Root stylesheet (navbar/footer CSS) — one level up */
+  /* Parent research site CSS (kept for compatibility) */
   addLink('stylesheet', '../styles.css');
 
-  /* Rekhi-specific stylesheet */
+  /* Rekhi-specific premium stylesheet */
   addLink('stylesheet', 'styles.css');
 
-  /* ─────────────────────────────────────────────────────────────
-     2. Header HTML
-     ───────────────────────────────────────────────────────────── */
-  var HEADER_HTML = `
-<!-- ── TOP BAR ── -->
-<div id="top-bar" role="navigation" aria-label="Secondary navigation">
-  <div class="top-bar-inner">
-    <nav class="top-bar-links" aria-label="Top links">
-      <a href="https://research.adamasuniversity.ac.in/anveshan/" class="top-bar-link">News &amp; Events <i class="fa-solid fa-chevron-down tb-arrow"></i></a>
-      <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="top-bar-link">Career</a>
-      <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="top-bar-link">Central Instrumentation Facility</a>
-    </nav>
-    <form role="search" method="get" action="https://research.adamasuniversity.ac.in/" class="top-bar-search">
-      <label for="top-search" class="sr-only">Search</label>
-      <i class="fa-solid fa-magnifying-glass" style="font-size:12px;"></i>
-      <input id="top-search" type="text" name="s" placeholder="Search"
-        class="bg-transparent border-none outline-none text-white placeholder-white/60 text-sm w-28 focus:w-40 transition-all duration-300" />
-    </form>
-  </div>
-</div>
 
-<!-- ── NAVBAR ── -->
-<nav id="navbar" aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="https://research.adamasuniversity.ac.in/" aria-label="Research — Adamas University home" class="shrink-0 flex items-center">
-      <img class="h-11 w-auto" src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/20063958/logo_601.png" alt="Research – Adamas University" width="200" height="60" />
-    </a>
+  /* ═══════════════════════════════════════════════════════
+     3. HEADER HTML — Rekhi Floating Navigation
+     ═══════════════════════════════════════════════════════ */
+  var HEADER_HTML = [
+    '<!-- ── REKHI FLOATING NAV ── -->',
+    '<nav id="rekhi-nav" role="navigation" aria-label="Rekhi Centre navigation">',
+    '  <div class="rn-inner">',
 
-    <ul id="nav-desktop" role="menubar" aria-label="Primary navigation">
+    '    <!-- Brand -->',
+    '    <a href="excellence.html" class="rn-brand" aria-label="Rekhi Centre of Excellence — Home">',
+    '      <img class="rn-brand-logo"',
+    '           src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/20063958/logo_601.png"',
+    '           alt="Adamas University" width="40" height="40" loading="eager">',
+    '      <div class="rn-brand-text">',
+    '        <span class="rn-brand-name">Rekhi Centre</span>',
+    '        <span class="rn-brand-sub">Science of Happiness &middot; Adamas University</span>',
+    '      </div>',
+    '    </a>',
 
-      <!-- Research mega -->
-      <li class="has-dropdown has-mega" role="none">
-        <a href="https://research.adamasuniversity.ac.in/" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true" aria-expanded="false">
-          Research <i class="fa-solid fa-chevron-down chevron"></i>
-        </a>
-        <div class="mega-panel" role="region" aria-label="Research submenu">
-          <div class="grid grid-cols-3 gap-8">
-            <div>
-              <div class="mega-col-title">Research</div>
-              <a href="https://research.adamasuniversity.ac.in/policy/" class="mega-link">Policy</a>
-              <a href="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2022/06/07052324/Policy-on-Promotion-of-Academic-Integrity-and-Prevention-of-Plagiarism.pdf" class="mega-link" target="_blank" rel="noopener">Code of Ethics for Research</a>
-              <a href="#" class="mega-link">Collaboration</a>
-              <a href="https://auaicoe.in/other-centres-of-excellence/" class="mega-link" target="_blank" rel="noopener">Centres of Excellence</a>
-              <div class="mega-col-title mt-5">Engineering Depts.</div>
-              <a href="https://engineering.adamasuniversity.ac.in/department-of-civil-engineering/" class="mega-link">Civil Engineering</a>
-              <a href="https://engineering.adamasuniversity.ac.in/department-of-computer-science-and-engineering/" class="mega-link">Computer Science &amp; Engg.</a>
-              <a href="https://engineering.adamasuniversity.ac.in/department-of-electrical-electronics-engineering/" class="mega-link">Electrical Engineering</a>
-              <a href="#" class="mega-link">Electronics &amp; Comm. Engg.</a>
-              <a href="https://engineering.adamasuniversity.ac.in/department-of-mechanical-engineering/" class="mega-link">Mechanical Engineering</a>
-              <a href="#" class="mega-link">Biomedical Engineering</a>
-            </div>
-            <div>
-              <div class="mega-col-title">Schools</div>
-              <a href="https://science.adamasuniversity.ac.in/chemistry/" class="mega-link">School of Basic &amp; Applied Sciences (SOBAS)</a>
-              <a href="https://business.adamasuniversity.ac.in/department-of-commerce/" class="mega-link">School of Business &amp; Economics (SOBE)</a>
-              <a href="https://education.adamasuniversity.ac.in/department-of-education/" class="mega-link">School of Education (SOE)</a>
-              <a href="https://engineering.adamasuniversity.ac.in/department-of-civil-engineering/" class="mega-link">School of Engineering &amp; Technology (SOET)</a>
-              <a href="https://law.adamasuniversity.ac.in/department-of-law/" class="mega-link">School of Law &amp; Justice (SOLJ)</a>
-              <a href="https://social-sciences.adamasuniversity.ac.in/bengali-language-and-literature/" class="mega-link">School of Liberal Arts &amp; Culture Studies (SOLACS)</a>
-              <a href="https://biotechnology.adamasuniversity.ac.in/department-of-biotechnology/" class="mega-link">School of Life Science &amp; Biotechnology (SOLB)</a>
-              <a href="https://media.adamasuniversity.ac.in/department-of-journalism-and-mass-communication/" class="mega-link">School of Media &amp; Communication (SOMC)</a>
-              <a href="https://medical-studies.adamasuniversity.ac.in/department-of-pharmaceutical-technology/" class="mega-link">School of Medical Sciences</a>
-              <a href="https://smart-agriculture.adamasuniversity.ac.in/agriculture/" class="mega-link">School of Smart Agriculture (SOSA)</a>
-            </div>
-            <div>
-              <div class="mega-col-title">Science Departments</div>
-              <a href="https://science.adamasuniversity.ac.in/chemistry/" class="mega-link">Chemistry</a>
-              <a href="https://science.adamasuniversity.ac.in/environmental-science/" class="mega-link">Environmental Science</a>
-              <a href="https://science.adamasuniversity.ac.in/department-of-forensic-science/" class="mega-link">Forensic Science</a>
-              <a href="https://science.adamasuniversity.ac.in/geography/" class="mega-link">Geography</a>
-              <a href="https://science.adamasuniversity.ac.in/mathematics/" class="mega-link">Mathematics</a>
-              <a href="https://science.adamasuniversity.ac.in/physics/" class="mega-link">Physics</a>
-              <div class="mega-col-title mt-5">Social Sciences</div>
-              <a href="https://social-sciences.adamasuniversity.ac.in/bengali-language-and-literature/" class="mega-link">Bengali Language &amp; Literature</a>
-              <a href="https://social-sciences.adamasuniversity.ac.in/department-of-english-language-and-literature/" class="mega-link">English Language &amp; Literature</a>
-              <a href="https://social-sciences.adamasuniversity.ac.in/department-of-history/" class="mega-link">History</a>
-              <a href="https://social-sciences.adamasuniversity.ac.in/department-of-political-science/" class="mega-link">Political Science</a>
-              <a href="#" class="mega-link">Psychology</a>
-              <a href="https://social-sciences.adamasuniversity.ac.in/department-of-sociology/" class="mega-link">Sociology</a>
-              <a href="#" class="mega-link">Creative Arts &amp; Culture Studies</a>
-            </div>
-          </div>
-        </div>
-      </li>
+    '    <!-- Desktop navigation links -->',
+    '    <ul id="rn-desktop-links" class="rn-links" role="menubar" aria-label="Primary navigation">',
+    '      <li role="none">',
+    '        <a href="excellence.html" class="rn-link" role="menuitem"',
+    '           data-page="excellence.html">Home</a>',
+    '      </li>',
+    '      <li role="none">',
+    '        <a href="our-team.html" class="rn-link" role="menuitem"',
+    '           data-page="our-team.html">Our Team</a>',
+    '      </li>',
+    '      <li role="none">',
+    '        <a href="activities.html" class="rn-link" role="menuitem"',
+    '           data-page="activities.html" data-section="infrastructure">Infrastructure and Lab</a>',
+    '      </li>',
+    '      <li role="none">',
+    '        <a href="courses.html" class="rn-link" role="menuitem"',
+    '           data-page="courses.html">Courses and Programs</a>',
+    '      </li>',
+    '      <li role="none">',
+    '        <a href="activities.html" class="rn-link" role="menuitem"',
+    '           data-page="activities.html" data-section="events">Activities</a>',
+    '      </li>',
+    '      <li role="none">',
+    '        <a href="announcements.html" class="rn-link" role="menuitem"',
+    '           data-page="announcements.html">Announcements</a>',
+    '      </li>',
+    '      <li role="none">',
+    '        <a href="contact.html" class="rn-link rn-cta" role="menuitem"',
+    '           data-page="contact.html">Contact Us</a>',
+    '      </li>',
+    '    </ul>',
 
-      <!-- Infrastructure -->
-      <li class="has-dropdown" role="none">
-        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">Infrastructure <i class="fa-solid fa-chevron-down chevron"></i></a>
-        <div class="dropdown-panel align-left" role="region">
-          <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="dd-item">Central Instrumentation Facility</a>
-        </div>
-      </li>
+    '    <!-- Mobile hamburger -->',
+    '    <button id="rn-hamburger" class="rn-hamburger"',
+    '            aria-label="Open navigation menu"',
+    '            aria-expanded="false"',
+    '            aria-controls="rekhi-drawer">',
+    '      <span></span><span></span><span></span>',
+    '    </button>',
 
-      <!-- Publication & Patent -->
-      <li class="has-dropdown" role="none">
-        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">Publication &amp; Patent <i class="fa-solid fa-chevron-down chevron"></i></a>
-        <div class="dropdown-panel align-left" style="min-width:240px;" role="region">
-          <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="dd-item">Published Research Papers</a>
-          <a href="https://research.adamasuniversity.ac.in/publications/" class="dd-item">Journals</a>
-          <a href="https://research.adamasuniversity.ac.in/book/" class="dd-item">Books / Chapters</a>
-          <a href="https://research.adamasuniversity.ac.in/patents/" class="dd-item">Patents</a>
-          <div class="has-sub">
-            <span class="dd-item cursor-default">Adamas Technical Review <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
-            <div class="sub-panel" role="region">
-              <a href="https://research.adamasuniversity.ac.in/volume-2-issue-2/" class="dd-item">Volume 2 Issue 2</a>
-              <a href="https://research.adamasuniversity.ac.in/volume-2-issue-1/" class="dd-item">Volume 2 Issue 1</a>
-            </div>
-          </div>
-        </div>
-      </li>
+    '  </div>',
+    '</nav>',
 
-      <!-- Funded Projects -->
-      <li class="has-dropdown" role="none">
-        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">Funded Projects <i class="fa-solid fa-chevron-down chevron"></i></a>
-        <div class="dropdown-panel align-left" role="region">
-          <a href="https://research.adamasuniversity.ac.in/extramural/" class="dd-item">Extramural</a>
-        </div>
-      </li>
+    '<!-- ── MOBILE OVERLAY ── -->',
+    '<div id="rekhi-overlay" aria-hidden="true"></div>',
 
-      <!-- Research Program -->
-      <li class="has-dropdown" role="none">
-        <a href="#" class="nav-link nav-trigger" role="menuitem" aria-haspopup="true">Research Program <i class="fa-solid fa-chevron-down chevron"></i></a>
-        <div class="dropdown-panel align-left" style="min-width:270px;" role="region">
-          <div class="has-sub">
-            <span class="dd-item cursor-default">Ph.D. Program <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
-            <div class="sub-panel" role="region">
-              <a href="https://research.adamasuniversity.ac.in/empaneled-supervisor/" class="dd-item">Empaneled Supervisor</a>
-              <a href="https://research.adamasuniversity.ac.in/phd-active-students-list-2015-2024/" class="dd-item">Ph.D Enrolled Scholars</a>
-              <a href="https://research.adamasuniversity.ac.in/ph-d-award-letters/" class="dd-item">Ph.D. Award Letters</a>
-              <a href="https://research.adamasuniversity.ac.in/ph-d-regulations/" class="dd-item">Ph.D Regulation</a>
-              <a href="https://research.adamasuniversity.ac.in/phd-notification/" class="dd-item">Ph.D. Notification</a>
-            </div>
-          </div>
-          <div class="has-sub">
-            <span class="dd-item cursor-default">Postdoctoral Program (by Research) <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
-            <div class="sub-panel" role="region">
-              <a href="https://research.adamasuniversity.ac.in/regulations/" class="dd-item">Regulations</a>
-              <a href="#" class="dd-item">Award Letters</a>
-              <a href="https://research.adamasuniversity.ac.in/notification/" class="dd-item">Notification</a>
-            </div>
-          </div>
-        </div>
-      </li>
+    '<!-- ── MOBILE DRAWER ── -->',
+    '<div id="rekhi-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">',
 
-      <!-- Research Center (active — all rekhi pages) -->
-      <li class="has-dropdown" role="none">
-        <a href="#" class="nav-link nav-trigger nav-active" role="menuitem" aria-haspopup="true" aria-current="page">
-          Research Center <i class="fa-solid fa-chevron-down chevron"></i>
-        </a>
-        <div class="dropdown-panel align-right" style="min-width:290px;" role="region">
-          <div class="has-sub">
-            <span class="dd-item cursor-default">Centre for Incubation <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
-            <div class="sub-panel left-side" role="region">
-              <a href="https://research.adamasuniversity.ac.in/innosprout-private-ltd/" class="dd-item">INNOSPROUT PRIVATE LTD</a>
-            </div>
-          </div>
-          <div class="has-sub">
-            <span class="dd-item cursor-default">Centre for Research &amp; Innovation (CRI) <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
-            <div class="sub-panel left-side" style="min-width:300px;" role="region">
-              <a href="#" class="dd-item">Centre for High-End Computing and Research</a>
-              <a href="https://research.adamasuniversity.ac.in/maharshi-krishna-deb/" class="dd-item">Subhash Mukhopadhyay Centre for Stem Cell Biology</a>
-              <a href="https://research.adamasuniversity.ac.in/dr-debarun-roy-roy-lab/" class="dd-item">Dr. Debarun Roy (Roy Lab)</a>
-              <a href="https://research.adamasuniversity.ac.in/msc-in-clinical-embryology/" class="dd-item">MSc in Clinical Embryology</a>
-              <a href="#" class="dd-item">Centre for Research in Business Analytics</a>
-              <a href="#" class="dd-item">Centre for Education, Research and Development</a>
-              <a href="#" class="dd-item">Centre for Material Research</a>
-              <a href="#" class="dd-item">Centre for Water and Air Analysis</a>
-            </div>
-          </div>
-          <a href="#" class="dd-item">Intellectual Property Right Cell</a>
-          <a href="#" class="dd-item">Outreach and Consultancy Cell</a>
-          <div class="has-sub">
-            <span class="dd-item cursor-default">AIU Academic Administrative Dev. Centre <i class="fa-solid fa-chevron-right dd-arrow"></i></span>
-            <div class="sub-panel left-side" role="region">
-              <a href="https://research.adamasuniversity.ac.in/aadc/" class="dd-item">AADC</a>
-            </div>
-          </div>
-          <a href="#" class="dd-item">Centre for Study of Contemporary Theory and Research</a>
-          <a href="#" class="dd-item">Centre of Excellence on Agro-Technology and Rural Dev.</a>
-          <a href="excellence.html" class="dd-item dd-item-active">Rekhi Centre of Excellence for the Science of Happiness</a>
-        </div>
-      </li>
+    '  <div class="rn-drawer-header">',
+    '    <a href="excellence.html" class="rn-drawer-brand" tabindex="0">',
+    '      <img class="rn-drawer-logo"',
+    '           src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/16141918/logo1.png"',
+    '           alt="Adamas University" width="34" height="34">',
+    '      <span class="rn-drawer-name">Rekhi Centre</span>',
+    '    </a>',
+    '    <button id="rn-drawer-close" class="rn-drawer-close" aria-label="Close navigation menu">',
+    '      <i class="fa-solid fa-xmark" aria-hidden="true"></i>',
+    '    </button>',
+    '  </div>',
 
-    </ul><!-- /nav-desktop -->
+    '  <nav class="rn-drawer-nav" aria-label="Mobile navigation">',
+    '    <a href="excellence.html" class="rn-drawer-link" data-page="excellence.html">Home</a>',
+    '    <a href="our-team.html"   class="rn-drawer-link" data-page="our-team.html">Our Team</a>',
+    '    <a href="activities.html" class="rn-drawer-link" data-page="activities.html">Infrastructure and Lab</a>',
+    '    <a href="courses.html"    class="rn-drawer-link" data-page="courses.html">Courses and Programs</a>',
+    '    <a href="activities.html" class="rn-drawer-link" data-page="activities.html">Activities</a>',
+    '    <a href="announcements.html" class="rn-drawer-link" data-page="announcements.html">Announcements</a>',
+    '  </nav>',
 
-    <div class="flex items-center gap-3 shrink-0">
-      <button id="mob-toggle" class="nav-link flex lg:hidden items-center justify-center w-10 h-10 rounded-md hover:bg-white/10 transition-colors"
-        aria-label="Open navigation menu" aria-expanded="false" aria-controls="mob-drawer">
-        <i class="fa-solid fa-bars text-xl"></i>
-      </button>
-    </div>
-  </div>
-</nav>
+    '  <a href="contact.html" class="rn-drawer-cta" data-page="contact.html">Contact Us</a>',
 
-<!-- ── MOBILE DRAWER ── -->
-<div id="mob-overlay" aria-hidden="true"></div>
-<div id="mob-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
-  <div class="flex items-center justify-between p-4 bg-[#005aab]">
-    <a href="https://research.adamasuniversity.ac.in/" tabindex="0">
-      <img src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/16141918/logo1.png" alt="Adamas University" class="h-10 w-auto" />
-    </a>
-    <button id="drawer-close" class="text-white/80 hover:text-white w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" aria-label="Close navigation menu">
-      <i class="fa-solid fa-xmark text-xl"></i>
-    </button>
-  </div>
-  <div class="p-4 border-b border-gray-100">
-    <form role="search" method="get" action="https://research.adamasuniversity.ac.in/" class="flex border border-gray-200 rounded-lg overflow-hidden">
-      <label for="mob-search" class="sr-only">Search</label>
-      <input id="mob-search" type="text" name="s" placeholder="Search…" class="flex-1 px-4 py-2 text-sm outline-none" />
-      <button type="submit" class="px-4 py-2 bg-[#005aab] text-white" aria-label="Submit search"><i class="fa-solid fa-magnifying-glass text-sm"></i></button>
-    </form>
-  </div>
-  <nav aria-label="Mobile navigation">
-    <button class="mob-acc-btn" data-acc="m-research" aria-expanded="false">Research <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
-    <div class="mob-acc-panel" id="m-research">
-      <a href="https://research.adamasuniversity.ac.in/policy/" class="mob-link">Policy</a>
-      <a href="#" class="mob-link">Collaboration</a>
-      <a href="https://auaicoe.in/other-centres-of-excellence/" class="mob-link" target="_blank" rel="noopener">Centres of Excellence</a>
-    </div>
-    <button class="mob-acc-btn" data-acc="m-infra" aria-expanded="false">Infrastructure <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
-    <div class="mob-acc-panel" id="m-infra">
-      <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="mob-link">Central Instrumentation Facility</a>
-    </div>
-    <button class="mob-acc-btn" data-acc="m-pub" aria-expanded="false">Publication &amp; Patent <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
-    <div class="mob-acc-panel" id="m-pub">
-      <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="mob-link">Published Research Papers</a>
-      <a href="https://research.adamasuniversity.ac.in/publications/" class="mob-link">Journals</a>
-      <a href="https://research.adamasuniversity.ac.in/book/" class="mob-link">Books / Chapters</a>
-      <a href="https://research.adamasuniversity.ac.in/patents/" class="mob-link">Patents</a>
-    </div>
-    <button class="mob-acc-btn" data-acc="m-funded" aria-expanded="false">Funded Projects <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
-    <div class="mob-acc-panel" id="m-funded">
-      <a href="https://research.adamasuniversity.ac.in/extramural/" class="mob-link">Extramural</a>
-    </div>
-    <button class="mob-acc-btn" data-acc="m-prog" aria-expanded="false">Research Program <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
-    <div class="mob-acc-panel" id="m-prog">
-      <div class="mob-link section-head">Ph.D. Program</div>
-      <a href="https://research.adamasuniversity.ac.in/empaneled-supervisor/" class="mob-link l2">Empaneled Supervisor</a>
-      <a href="https://research.adamasuniversity.ac.in/phd-active-students-list-2015-2024/" class="mob-link l2">Ph.D Enrolled Scholars</a>
-      <a href="https://research.adamasuniversity.ac.in/ph-d-award-letters/" class="mob-link l2">Ph.D. Award Letters</a>
-      <a href="https://research.adamasuniversity.ac.in/ph-d-regulations/" class="mob-link l2">Ph.D Regulation</a>
-      <a href="https://research.adamasuniversity.ac.in/phd-notification/" class="mob-link l2">Ph.D. Notification</a>
-    </div>
-    <button class="mob-acc-btn mob-acc-btn--active" data-acc="m-center" aria-expanded="false">Research Center <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
-    <div class="mob-acc-panel" id="m-center">
-      <a href="https://incubation.adamasuniversity.ac.in" class="mob-link">Centre for Incubation</a>
-      <a href="#" class="mob-link">Centre for Research &amp; Innovation (CRI)</a>
-      <a href="#" class="mob-link">Intellectual Property Right Cell</a>
-      <a href="#" class="mob-link">Outreach and Consultancy Cell</a>
-      <a href="https://research.adamasuniversity.ac.in/aadc/" class="mob-link">AIU Academic Administrative Dev. Centre (AADC)</a>
-      <a href="#" class="mob-link">Centre for Study of Contemporary Theory and Research</a>
-      <a href="#" class="mob-link">Centre of Excellence on Agro-Technology and Rural Development</a>
-      <a href="excellence.html" class="mob-link mob-link-active">Rekhi Centre of Excellence for the Science of Happiness</a>
-    </div>
-    <div class="border-t border-gray-200 mt-1">
-      <button class="mob-acc-btn" data-acc="m-news" aria-expanded="false">News &amp; Events <i class="fa-solid fa-chevron-down mob-acc-icon"></i></button>
-      <div class="mob-acc-panel" id="m-news">
-        <a href="https://research.adamasuniversity.ac.in/anveshan/" class="mob-link">Anveshan</a>
-        <a href="https://research.adamasuniversity.ac.in/circular-and-notifications/" class="mob-link">Circular and Notifications</a>
-        <a href="https://research.adamasuniversity.ac.in/seminars-webinar-fdp/" class="mob-link">Seminars / Webinar / FDP</a>
-      </div>
-      <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="mob-acc-btn" style="text-decoration:none;">Career</a>
-      <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="mob-acc-btn" style="text-decoration:none;">Central Instrumentation Facility</a>
-    </div>
-  </nav>
-  <div class="p-5 mt-2 border-t border-gray-100 flex flex-col gap-3">
-    <a href="https://adamasuniversity.nopaperforms.com" class="block w-full text-center bg-[#005aab] text-white font-semibold text-sm py-3 rounded-xl hover:bg-[#003d73] transition-colors">Apply for Admission</a>
-    <a href="https://adamasuniversity.ac.in/enquire-now/" class="block w-full text-center border border-[#005aab] text-[#005aab] font-semibold text-sm py-3 rounded-xl hover:bg-[#f0f7ff] transition-colors">Enquire Now</a>
-  </div>
-</div>`;
+    '</div>'
+  ].join('\n');
 
-  /* ─────────────────────────────────────────────────────────────
-     3. Footer HTML
-     ───────────────────────────────────────────────────────────── */
-  var FOOTER_HTML = `
-<footer id="footer" role="contentinfo" aria-label="Site footer">
-  <div class="py-16">
-    <div class="max-w-[1280px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-      <!-- Col 1 -->
-      <div>
-        <a href="https://research.adamasuniversity.ac.in/" aria-label="Home">
-          <img src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17141932/au-footer-logo.png"
-               alt="Adamas University" class="h-[72px] w-auto mb-6" loading="lazy" width="200" height="187" />
-        </a>
-        <div class="space-y-3 text-sm text-white/65 leading-relaxed">
-          <div class="flex items-start gap-3">
-            <i class="fa-solid fa-location-dot mt-0.5 text-[#1f7ae0] shrink-0 text-base"></i>
-            <span>Barasat-Barrackpore Road, Barbaria, P.O Jagannathpur, District-24 Parganas (North), Kolkata-700 126, West Bengal, India</span>
-          </div>
-          <div class="flex items-center gap-3">
-            <i class="fa-solid fa-phone text-[#1f7ae0] shrink-0 text-base"></i>
-            <a href="tel:18004197423" class="hover:text-white transition-colors">1800 419 7423</a>
-          </div>
-        </div>
-        <p class="text-white/30 text-xs mt-6">&copy; 2021 Adamas University. All rights reserved.</p>
-      </div>
-      <!-- Col 2 -->
-      <div>
-        <h2 class="ft-head">Top Menu</h2>
-        <div class="flex flex-col">
-          <a href="https://research.adamasuniversity.ac.in/anveshan/" class="ft-link">News &amp; Events</a>
-          <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="ft-link">Career</a>
-          <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="ft-link">Central Instrumentation Facility</a>
-        </div>
-      </div>
-      <!-- Col 3 -->
-      <div>
-        <h2 class="ft-head">Research</h2>
-        <div class="flex flex-col">
-          <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="ft-link">Publications</a>
-          <a href="https://research.adamasuniversity.ac.in/patents/" class="ft-link">Patents</a>
-          <a href="https://research.adamasuniversity.ac.in/extramural/" class="ft-link">Funded Projects</a>
-          <a href="https://research.adamasuniversity.ac.in/empaneled-supervisor/" class="ft-link">Ph.D. Program</a>
-          <a href="excellence.html" class="ft-link">Rekhi Centre</a>
-        </div>
-      </div>
-      <!-- Col 4 -->
-      <div>
-        <h2 class="ft-head">Important Links</h2>
-        <div class="flex flex-col">
-          <a href="https://adamasuniversity.nopaperforms.com" class="ft-link">Apply for Admission</a>
-          <a href="https://adamasuniversity.ac.in/enquire-now/" class="ft-link">Enquire Now</a>
-          <a href="https://aulibrary.adamasuniversity.ac.in/" class="ft-link">Library</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Bottom bar -->
-  <div class="border-t border-white/10 py-5">
-    <div class="max-w-[1280px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <a href="https://research.adamasuniversity.ac.in/" aria-label="Home">
-        <img src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/16141918/logo1.png"
-             alt="Adamas University" class="h-10 w-auto" loading="lazy" />
-      </a>
-      <div class="flex gap-6 text-sm text-white/50">
-        <a href="https://research.adamasuniversity.ac.in/anveshan/" class="hover:text-white transition-colors">News &amp; Events</a>
-        <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="hover:text-white transition-colors">Career</a>
-        <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="hover:text-white transition-colors">Central Instrumentation Facility</a>
-      </div>
-    </div>
-  </div>
-</footer>`;
 
-  /* ─────────────────────────────────────────────────────────────
-     4. Inject on DOM ready
-     ───────────────────────────────────────────────────────────── */
+  /* ═══════════════════════════════════════════════════════
+     4. FOOTER HTML — Enterprise layout, pure CSS
+     ═══════════════════════════════════════════════════════ */
+  var FOOTER_HTML = [
+    '<footer id="footer" role="contentinfo" aria-label="Site footer">',
+
+    '  <!-- Main footer body -->',
+    '  <div class="rk-ft-body">',
+    '    <div class="rk-ft-container">',
+    '      <div class="rk-ft-grid">',
+
+    '        <!-- Column 1: Brand & Address -->',
+    '        <div>',
+    '          <a href="https://research.adamasuniversity.ac.in/" aria-label="Research — Adamas University home">',
+    '            <img class="rk-ft-logo"',
+    '                 src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/17141932/au-footer-logo.png"',
+    '                 alt="Adamas University" loading="lazy" width="200" height="187">',
+    '          </a>',
+    '          <div class="rk-ft-address">',
+    '            <div class="rk-ft-address-row">',
+    '              <i class="fa-solid fa-location-dot rk-ft-icon" aria-hidden="true"></i>',
+    '              <span>Barasat-Barrackpore Road, Barbaria, P.O Jagannathpur, District-24 Parganas (North), Kolkata-700&nbsp;126, West Bengal, India</span>',
+    '            </div>',
+    '            <div class="rk-ft-address-row">',
+    '              <i class="fa-solid fa-phone rk-ft-icon" aria-hidden="true"></i>',
+    '              <a href="tel:18004197423" class="rk-ft-phone-link">1800 419 7423</a>',
+    '            </div>',
+    '          </div>',
+    '          <p class="rk-ft-copyright">&copy; 2021 Adamas University. All rights reserved.</p>',
+    '        </div>',
+
+    '        <!-- Column 2: Top Menu -->',
+    '        <div>',
+    '          <h2 class="ft-head">Top Menu</h2>',
+    '          <div class="rk-ft-links">',
+    '            <a href="https://research.adamasuniversity.ac.in/anveshan/" class="ft-link">News &amp; Events</a>',
+    '            <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="ft-link">Career</a>',
+    '            <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="ft-link">Central Instrumentation Facility</a>',
+    '          </div>',
+    '        </div>',
+
+    '        <!-- Column 3: Research -->',
+    '        <div>',
+    '          <h2 class="ft-head">Research</h2>',
+    '          <div class="rk-ft-links">',
+    '            <a href="https://research.adamasuniversity.ac.in/published-research-papers/" class="ft-link">Publications</a>',
+    '            <a href="https://research.adamasuniversity.ac.in/patents/" class="ft-link">Patents</a>',
+    '            <a href="https://research.adamasuniversity.ac.in/extramural/" class="ft-link">Funded Projects</a>',
+    '            <a href="https://research.adamasuniversity.ac.in/empaneled-supervisor/" class="ft-link">Ph.D. Program</a>',
+    '            <a href="excellence.html" class="ft-link">Rekhi Centre</a>',
+    '          </div>',
+    '        </div>',
+
+    '        <!-- Column 4: Important Links -->',
+    '        <div>',
+    '          <h2 class="ft-head">Important Links</h2>',
+    '          <div class="rk-ft-links">',
+    '            <a href="https://adamasuniversity.nopaperforms.com" class="ft-link">Apply for Admission</a>',
+    '            <a href="https://adamasuniversity.ac.in/enquire-now/" class="ft-link">Enquire Now</a>',
+    '            <a href="https://aulibrary.adamasuniversity.ac.in/" class="ft-link">Library</a>',
+    '          </div>',
+    '        </div>',
+
+    '      </div>',
+    '    </div>',
+    '  </div>',
+
+    '  <!-- Bottom bar -->',
+    '  <div class="rk-ft-bottom">',
+    '    <div class="rk-ft-bottom-inner">',
+    '      <a href="https://research.adamasuniversity.ac.in/" aria-label="Research — Adamas University home">',
+    '        <img class="rk-ft-bottom-logo"',
+    '             src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/16141918/logo1.png"',
+    '             alt="Adamas University" loading="lazy">',
+    '      </a>',
+    '      <nav class="rk-ft-bottom-nav" aria-label="Footer quick links">',
+    '        <a href="https://research.adamasuniversity.ac.in/anveshan/" class="rk-ft-bottom-link">News &amp; Events</a>',
+    '        <a href="https://research.adamasuniversity.ac.in/advertisement-for-recruitment-through-re-entry-fellowships/" class="rk-ft-bottom-link">Career</a>',
+    '        <a href="https://research.adamasuniversity.ac.in/central-instrumentation-facility/" class="rk-ft-bottom-link">Central Instrumentation Facility</a>',
+    '      </nav>',
+    '    </div>',
+    '  </div>',
+
+    '</footer>'
+  ].join('\n');
+
+
+  /* ═══════════════════════════════════════════════════════
+     5. SCROLL-TO-TOP BUTTON
+     ═══════════════════════════════════════════════════════ */
+  var STT_HTML = '<a href="#" id="rk-scroll-top" class="rekhi-scroll-top" aria-label="Back to top" title="Back to top"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></a>';
+
+
+  /* ═══════════════════════════════════════════════════════
+     6. DOM READY — inject & initialise
+     ═══════════════════════════════════════════════════════ */
   document.addEventListener('DOMContentLoaded', function () {
 
-    /* Set body font & overflow */
-    document.body.style.fontFamily = "'Inter', system-ui, sans-serif";
-    document.body.style.overflowX  = 'hidden';
+    /* Body base styles */
+    document.body.style.fontFamily   = "'Inter', system-ui, sans-serif";
+    document.body.style.overflowX    = 'hidden';
 
-    /* Inject header before first child of <body> */
+    /* Inject header at the very top */
     document.body.insertAdjacentHTML('afterbegin', HEADER_HTML);
 
-    /* Push page content down so it clears fixed top-bar(38px)+navbar(64px) */
+    /* Adjust page margin to clear new nav (68px) */
     var page = document.getElementById('page');
-    if (page) { page.style.marginTop = '102px'; }
+    if (page) page.style.marginTop = '68px';
 
-    /* Inject footer at end of <body> */
+    /* Inject footer */
     document.body.insertAdjacentHTML('beforeend', FOOTER_HTML);
 
-    /* ── Navbar scroll shadow ── */
-    var navbar = document.getElementById('navbar');
-    if (navbar) {
+    /* Inject scroll-to-top */
+    document.body.insertAdjacentHTML('beforeend', STT_HTML);
+
+    /* ── Active link detection ── */
+    var _pathname    = window.location.pathname;
+    var _currentPage = _pathname.split('/').pop() || 'excellence.html';
+    if (_currentPage === '') _currentPage = 'excellence.html';
+
+    function markActive(selector) {
+      document.querySelectorAll(selector + '[data-page]').forEach(function (link) {
+        if (link.getAttribute('data-page') === _currentPage) {
+          link.classList.add('rn-active');
+        }
+      });
+    }
+    markActive('.rn-link');
+    markActive('.rn-drawer-link');
+
+    /* Mark drawer CTA active if on contact page */
+    var drawerCta = document.querySelector('.rn-drawer-cta');
+    if (drawerCta && drawerCta.getAttribute('data-page') === _currentPage) {
+      drawerCta.style.outline = '2px solid rgba(255,255,255,0.35)';
+    }
+
+    /* ── Hero modifier for excellence.html ── */
+    if (_currentPage === 'excellence.html' || _currentPage === '') {
+      var _hero = document.querySelector('.rekhi-hero');
+      if (_hero) _hero.classList.add('rekhi-hero-home');
+    }
+
+    /* ── Nav scroll effect ── */
+    var _nav = document.getElementById('rekhi-nav');
+    if (_nav) {
       window.addEventListener('scroll', function () {
-        navbar.classList.toggle('scrolled', window.scrollY > 10);
+        _nav.classList.toggle('rn-scrolled', window.scrollY > 20);
       }, { passive: true });
     }
 
-    /* ── Mobile Drawer ── */
-    var overlay   = document.getElementById('mob-overlay');
-    var drawer    = document.getElementById('mob-drawer');
-    var toggleBtn = document.getElementById('mob-toggle');
-    var closeBtn  = document.getElementById('drawer-close');
+    /* ── Mobile drawer ── */
+    var _overlay   = document.getElementById('rekhi-overlay');
+    var _drawer    = document.getElementById('rekhi-drawer');
+    var _hamburger = document.getElementById('rn-hamburger');
+    var _closeBtn  = document.getElementById('rn-drawer-close');
 
     function openDrawer() {
-      if (!drawer || !overlay || !toggleBtn) return;
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden', 'false');
-      toggleBtn.setAttribute('aria-expanded', 'true');
+      if (!_drawer || !_overlay) return;
+      _drawer.classList.add('rn-open');
+      _overlay.classList.add('rn-open');
+      _overlay.setAttribute('aria-hidden', 'false');
+      if (_hamburger) {
+        _hamburger.setAttribute('aria-expanded', 'true');
+        _hamburger.classList.add('rn-open');
+      }
       document.body.style.overflow = 'hidden';
-      if (closeBtn) closeBtn.focus();
+      if (_closeBtn) _closeBtn.focus();
     }
+
     function closeDrawer() {
-      if (!drawer || !overlay || !toggleBtn) return;
-      drawer.classList.remove('open');
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
-      toggleBtn.setAttribute('aria-expanded', 'false');
+      if (!_drawer || !_overlay) return;
+      _drawer.classList.remove('rn-open');
+      _overlay.classList.remove('rn-open');
+      _overlay.setAttribute('aria-hidden', 'true');
+      if (_hamburger) {
+        _hamburger.setAttribute('aria-expanded', 'false');
+        _hamburger.classList.remove('rn-open');
+      }
       document.body.style.overflow = '';
-      toggleBtn.focus();
+      if (_hamburger) _hamburger.focus();
     }
 
-    if (toggleBtn) toggleBtn.addEventListener('click', openDrawer);
-    if (closeBtn)  closeBtn.addEventListener('click', closeDrawer);
-    if (overlay)   overlay.addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+    if (_hamburger) _hamburger.addEventListener('click', openDrawer);
+    if (_closeBtn)  _closeBtn.addEventListener('click', closeDrawer);
+    if (_overlay)   _overlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeDrawer();
+    });
 
-    /* ── Mobile Accordion ── */
-    document.querySelectorAll('.mob-acc-btn[data-acc]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var targetId = btn.getAttribute('data-acc');
-        var panel    = document.getElementById(targetId);
-        if (!panel) return;
-        var isOpen   = panel.classList.contains('open');
-        document.querySelectorAll('.mob-acc-panel').forEach(function (p) { p.classList.remove('open'); });
-        document.querySelectorAll('.mob-acc-btn[data-acc]').forEach(function (b) {
-          b.classList.remove('open');
-          b.setAttribute('aria-expanded', 'false');
-        });
-        if (!isOpen) {
-          panel.classList.add('open');
-          btn.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
+    /* Close drawer when a drawer link is clicked */
+    document.querySelectorAll('.rn-drawer-link, .rn-drawer-cta').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (window.innerWidth <= 992) closeDrawer();
       });
     });
 
-  });
+    /* ── Scroll-to-top button ── */
+    var _stt = document.getElementById('rk-scroll-top');
+    if (_stt) {
+      window.addEventListener('scroll', function () {
+        _stt.classList.toggle('visible', window.scrollY > 300);
+      }, { passive: true });
+      _stt.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    /* ── GSAP: load then initialise ── */
+    loadScript(
+      'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+      function () {
+        loadScript(
+          'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+          function () {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+            gsap.registerPlugin(ScrollTrigger);
+            _initGSAP();
+          }
+        );
+      }
+    );
+
+    /* ════════════════════════════════════════════════════
+       GSAP ANIMATIONS
+       ════════════════════════════════════════════════════ */
+    function _initGSAP() {
+
+      /* ── Nav slide-down entrance ── */
+      gsap.from('#rekhi-nav', {
+        y: -80,
+        opacity: 0,
+        duration: 0.75,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity'
+      });
+
+      /* ── Hero section entrance ── */
+      var _heroLogo  = document.querySelector('.rekhi-hero-logo');
+      var _heroTitle = document.querySelector('.rekhi-hero-title');
+      var _heroSub   = document.querySelector('.rekhi-hero-sub');
+      var _heroBadge = document.querySelector('.rekhi-hero-badge');
+
+      if (_heroTitle) {
+        var _heroTl = gsap.timeline({ delay: 0.25 });
+
+        if (_heroLogo) {
+          _heroTl.from(_heroLogo, {
+            opacity: 0,
+            x: -36,
+            duration: 0.85,
+            ease: 'power3.out'
+          });
+        }
+
+        _heroTl.from(_heroTitle, {
+          opacity: 0,
+          y: 28,
+          duration: 0.75,
+          ease: 'power2.out'
+        }, _heroLogo ? '-=0.55' : 0);
+
+        if (_heroSub) {
+          _heroTl.from(_heroSub, {
+            opacity: 0,
+            y: 18,
+            duration: 0.65,
+            ease: 'power2.out'
+          }, '-=0.45');
+        }
+
+        if (_heroBadge) {
+          _heroTl.from(_heroBadge, {
+            opacity: 0,
+            scale: 0.75,
+            duration: 0.55,
+            ease: 'back.out(1.7)'
+          }, '-=0.35');
+        }
+      }
+
+      /* ── Helper: ScrollTrigger reveal ── */
+      function revealOnScroll(selector, vars) {
+        gsap.utils.toArray(selector).forEach(function (el) {
+          gsap.from(el, Object.assign({}, {
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              once: true
+            }
+          }, vars));
+        });
+      }
+
+      /* ── Helper: stagger batch reveal ── */
+      function staggerReveal(selector, vars, triggerSelector) {
+        var els = gsap.utils.toArray(selector);
+        if (!els.length) return;
+        gsap.from(els, Object.assign({}, vars, {
+          scrollTrigger: {
+            trigger: triggerSelector || els[0],
+            start: 'top 85%',
+            once: true
+          }
+        }));
+      }
+
+      /* ── Section headings ── */
+      revealOnScroll('.section-heading', {
+        opacity: 0, y: 22,
+        duration: 0.65, ease: 'power2.out'
+      });
+
+      /* ── About block ── */
+      revealOnScroll('.about-block', {
+        opacity: 0, y: 32,
+        duration: 0.80, ease: 'power2.out'
+      });
+
+      /* ── Feature cards — staggered ── */
+      staggerReveal('.feature-card', {
+        opacity: 0, y: 36,
+        stagger: 0.13, duration: 0.72, ease: 'power2.out'
+      });
+
+      /* ── Blue panels ── */
+      revealOnScroll('.panel-blue', {
+        opacity: 0, y: 28,
+        duration: 0.80, ease: 'power2.out'
+      });
+
+      /* ── Person cards — individual triggers ── */
+      gsap.utils.toArray('.person-card').forEach(function (card, i) {
+        gsap.from(card, {
+          opacity: 0,
+          y: 30,
+          duration: 0.70,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 88%',
+            once: true
+          }
+        });
+      });
+
+      /* ── Avatar cards — staggered ── */
+      staggerReveal('.avatar-card', {
+        opacity: 0, y: 24, scale: 0.96,
+        stagger: 0.07, duration: 0.60, ease: 'power2.out'
+      });
+
+      /* ── Programme cards — staggered ── */
+      staggerReveal('.prog-card', {
+        opacity: 0, y: 28,
+        stagger: 0.12, duration: 0.70, ease: 'power2.out'
+      });
+
+      /* ── Generic cards ── */
+      revealOnScroll('.card', {
+        opacity: 0, y: 22,
+        duration: 0.60, ease: 'power2.out'
+      });
+
+      /* ── Engage items — slide from left ── */
+      staggerReveal('.engage-item', {
+        opacity: 0, x: -22,
+        stagger: 0.09, duration: 0.55, ease: 'power2.out'
+      });
+
+      /* ── Photo grid images — scale in ── */
+      gsap.utils.toArray('.photo-grid img').forEach(function (img, i) {
+        gsap.from(img, {
+          opacity: 0,
+          scale: 0.94,
+          duration: 0.80,
+          delay: i * 0.09,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top 88%',
+            once: true
+          }
+        });
+      });
+
+      /* ── Announcements table ── */
+      revealOnScroll('.announce-table', {
+        opacity: 0, y: 24,
+        duration: 0.70, ease: 'power2.out'
+      });
+
+      /* ── Contact cards ── */
+      gsap.utils.toArray(
+        '.contact-hero-card, .contact-person-card, .contact-addr-card'
+      ).forEach(function (el, i) {
+        gsap.from(el, {
+          opacity: 0,
+          y: 24,
+          duration: 0.60,
+          delay: i * 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+            once: true
+          }
+        });
+      });
+
+      /* ── Activity items — staggered list ── */
+      staggerReveal('.activity-item', {
+        opacity: 0, x: -16,
+        stagger: 0.08, duration: 0.50, ease: 'power2.out'
+      });
+
+      /* ── Prog items inside cards ── */
+      revealOnScroll('.prog-item', {
+        opacity: 0, x: -12,
+        duration: 0.45, ease: 'power2.out'
+      });
+
+      /* ── Footer columns fade in ── */
+      gsap.utils.toArray('#footer .rk-ft-grid > div').forEach(function (col, i) {
+        gsap.from(col, {
+          opacity: 0,
+          y: 20,
+          duration: 0.65,
+          delay: i * 0.10,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '#footer',
+            start: 'top 92%',
+            once: true
+          }
+        });
+      });
+
+    } // end _initGSAP
+
+  }); // end DOMContentLoaded
 
 })();
