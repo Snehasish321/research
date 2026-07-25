@@ -93,31 +93,31 @@
     '    <ul id="rn-desktop-links" class="rn-links" role="menubar" aria-label="Primary navigation">',
     '      <li role="none">',
     '        <a href="excellence.html" class="rn-link" role="menuitem"',
-    '           data-page="excellence.html">Home</a>',
+    '           data-id="home">Home</a>',
     '      </li>',
     '      <li role="none">',
     '        <a href="our-team.html" class="rn-link" role="menuitem"',
-    '           data-page="our-team.html">Our Team</a>',
+    '           data-id="team">Our Team</a>',
     '      </li>',
     '      <li role="none">',
-    '        <a href="activities.html" class="rn-link" role="menuitem"',
-    '           data-page="activities.html" data-section="infrastructure">Infrastructure and Lab</a>',
+    '        <a href="activities.html#infrastructure" class="rn-link" role="menuitem"',
+    '           data-id="infrastructure">Infrastructure and Lab</a>',
     '      </li>',
     '      <li role="none">',
     '        <a href="courses.html" class="rn-link" role="menuitem"',
-    '           data-page="courses.html">Courses and Programs</a>',
+    '           data-id="courses">Courses and Programs</a>',
     '      </li>',
     '      <li role="none">',
-    '        <a href="activities.html" class="rn-link" role="menuitem"',
-    '           data-page="activities.html" data-section="events">Activities</a>',
+    '        <a href="activities.html#events" class="rn-link" role="menuitem"',
+    '           data-id="activities">Activities</a>',
     '      </li>',
     '      <li role="none">',
     '        <a href="announcements.html" class="rn-link" role="menuitem"',
-    '           data-page="announcements.html">Announcements</a>',
+    '           data-id="announcements">Announcements</a>',
     '      </li>',
     '      <li role="none">',
     '        <a href="contact.html" class="rn-link rn-cta" role="menuitem"',
-    '           data-page="contact.html">Contact Us</a>',
+    '           data-id="contact">Contact Us</a>',
     '      </li>',
     '    </ul>',
 
@@ -151,15 +151,15 @@
     '  </div>',
 
     '  <nav class="rn-drawer-nav" aria-label="Mobile navigation">',
-    '    <a href="excellence.html" class="rn-drawer-link" data-page="excellence.html">Home</a>',
-    '    <a href="our-team.html"   class="rn-drawer-link" data-page="our-team.html">Our Team</a>',
-    '    <a href="activities.html" class="rn-drawer-link" data-page="activities.html">Infrastructure and Lab</a>',
-    '    <a href="courses.html"    class="rn-drawer-link" data-page="courses.html">Courses and Programs</a>',
-    '    <a href="activities.html" class="rn-drawer-link" data-page="activities.html">Activities</a>',
-    '    <a href="announcements.html" class="rn-drawer-link" data-page="announcements.html">Announcements</a>',
+    '    <a href="excellence.html" class="rn-drawer-link" data-id="home">Home</a>',
+    '    <a href="our-team.html"   class="rn-drawer-link" data-id="team">Our Team</a>',
+    '    <a href="activities.html#infrastructure" class="rn-drawer-link" data-id="infrastructure">Infrastructure and Lab</a>',
+    '    <a href="courses.html"    class="rn-drawer-link" data-id="courses">Courses and Programs</a>',
+    '    <a href="activities.html#events" class="rn-drawer-link" data-id="activities">Activities</a>',
+    '    <a href="announcements.html" class="rn-drawer-link" data-id="announcements">Announcements</a>',
     '  </nav>',
 
-    '  <a href="contact.html" class="rn-drawer-cta" data-page="contact.html">Contact Us</a>',
+    '  <a href="contact.html" class="rn-drawer-cta" data-id="contact">Contact Us</a>',
 
     '</div>'
   ].join('\n');
@@ -285,21 +285,39 @@
     var _currentPage = _pathname.split('/').pop() || 'excellence.html';
     if (_currentPage === '') _currentPage = 'excellence.html';
 
-    function markActive(selector) {
-      document.querySelectorAll(selector + '[data-page]').forEach(function (link) {
-        if (link.getAttribute('data-page') === _currentPage) {
+    function updateActiveLinks() {
+      var hash = window.location.hash;
+      var activeId = null;
+
+      if (_currentPage === 'excellence.html' || _currentPage === '') {
+        activeId = 'home';
+      } else if (_currentPage === 'our-team.html') {
+        activeId = 'team';
+      } else if (_currentPage === 'courses.html') {
+        activeId = 'courses';
+      } else if (_currentPage === 'announcements.html') {
+        activeId = 'announcements';
+      } else if (_currentPage === 'contact.html') {
+        activeId = 'contact';
+      } else if (_currentPage === 'activities.html') {
+        if (hash === '#infrastructure') {
+          activeId = 'infrastructure';
+        } else {
+          activeId = 'activities';
+        }
+      }
+
+      document.querySelectorAll('.rn-link, .rn-drawer-link, .rn-drawer-cta').forEach(function (link) {
+        if (link.getAttribute('data-id') === activeId) {
           link.classList.add('rn-active');
+        } else {
+          link.classList.remove('rn-active');
         }
       });
     }
-    markActive('.rn-link');
-    markActive('.rn-drawer-link');
 
-    /* Mark drawer CTA active if on contact page */
-    var drawerCta = document.querySelector('.rn-drawer-cta');
-    if (drawerCta && drawerCta.getAttribute('data-page') === _currentPage) {
-      drawerCta.style.outline = '2px solid rgba(255,255,255,0.35)';
-    }
+    updateActiveLinks();
+    window.addEventListener('hashchange', updateActiveLinks);
 
     /* ── Hero modifier for excellence.html ── */
     if (_currentPage === 'excellence.html' || _currentPage === '') {
@@ -452,24 +470,27 @@
           gsap.from(el, Object.assign({}, {
             scrollTrigger: {
               trigger: el,
-              start: 'top 88%',
+              start: 'top 92%',
               once: true
-            }
+            },
+            clearProps: 'transform,opacity'
           }, vars));
         });
       }
 
       /* ── Helper: stagger batch reveal ── */
-      function staggerReveal(selector, vars, triggerSelector) {
+      function staggerReveal(selector, vars) {
         var els = gsap.utils.toArray(selector);
         if (!els.length) return;
-        gsap.from(els, Object.assign({}, vars, {
-          scrollTrigger: {
-            trigger: triggerSelector || els[0],
-            start: 'top 85%',
-            once: true
+        ScrollTrigger.batch(els, {
+          start: 'top 92%',
+          once: true,
+          onEnter: function (batch) {
+            gsap.from(batch, Object.assign({}, vars, {
+              clearProps: 'transform,opacity'
+            }));
           }
-        }));
+        });
       }
 
       /* ── Section headings ── */
@@ -503,9 +524,10 @@
           y: 30,
           duration: 0.70,
           ease: 'power2.out',
+          clearProps: 'transform,opacity',
           scrollTrigger: {
             trigger: card,
-            start: 'top 88%',
+            start: 'top 92%',
             once: true
           }
         });
@@ -543,9 +565,10 @@
           duration: 0.80,
           delay: i * 0.09,
           ease: 'power2.out',
+          clearProps: 'transform,opacity',
           scrollTrigger: {
             trigger: img,
-            start: 'top 88%',
+            start: 'top 92%',
             once: true
           }
         });
@@ -567,9 +590,10 @@
           duration: 0.60,
           delay: i * 0.08,
           ease: 'power2.out',
+          clearProps: 'transform,opacity',
           scrollTrigger: {
             trigger: el,
-            start: 'top 90%',
+            start: 'top 92%',
             once: true
           }
         });
@@ -595,14 +619,16 @@
           duration: 0.65,
           delay: i * 0.10,
           ease: 'power2.out',
+          clearProps: 'transform,opacity',
           scrollTrigger: {
             trigger: '#footer',
-            start: 'top 92%',
+            start: 'top 95%',
             once: true
           }
         });
       });
 
+      setTimeout(function () { ScrollTrigger.refresh(); }, 200);
     } // end _initGSAP
 
   }); // end DOMContentLoaded

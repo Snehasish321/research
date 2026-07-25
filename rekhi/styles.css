@@ -289,6 +289,7 @@ ul { list-style: none; }
 
 /* ── Mobile Drawer ── */
 #rekhi-drawer {
+  display: none;
   position: fixed;
   top: 0; right: 0; bottom: 0;
   width: min(320px, 88vw);
@@ -296,12 +297,18 @@ ul { list-style: none; }
   z-index: 1001;
   transform: translateX(100%);
   transition: transform 0.36s var(--ease);
-  display: flex;
   flex-direction: column;
   overflow-y: auto;
   box-shadow: -12px 0 48px rgba(0,0,0,0.35);
+  visibility: hidden;
+  pointer-events: none;
 }
-#rekhi-drawer.rn-open { transform: translateX(0); }
+#rekhi-drawer.rn-open {
+  display: flex;
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
 
 .rn-drawer-header {
   display: flex;
@@ -520,27 +527,29 @@ ul { list-style: none; }
    PAGE LAYOUT — sidebar + main
    ═══════════════════════════════════════════════════════════ */
 .rekhi-layout {
-  display: flex;
+  display: block;
+  max-width: 1360px;
+  margin: 0 auto;
   min-height: calc(100vh - 280px);
 }
 
-/* ── Sidebar ── */
+/* ── Sidebar (Hidden) ── */
 .rekhi-sidebar {
-  width: 240px;
-  flex-shrink: 0;
-  background: var(--white);
-  border-right: 1px solid var(--border);
-  padding: 32px 0 48px;
-  position: sticky;
-  top: var(--nav-h);
-  height: calc(100vh - var(--nav-h));
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+  display: none !important;
 }
-.rekhi-sidebar::-webkit-scrollbar { width: 4px; }
-.rekhi-sidebar::-webkit-scrollbar-track { background: transparent; }
-.rekhi-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ── Mobile Tab Nav (Hidden) ── */
+.rekhi-mobile-nav {
+  display: none !important;
+}
+
+/* ── Main content area ── */
+.rekhi-main {
+  width: 100%;
+  padding: 48px 56px 72px;
+  min-width: 0;
+  box-sizing: border-box;
+}
 
 .rekhi-sidebar-title {
   font-size: 0.63rem;
@@ -1686,8 +1695,8 @@ ul { list-style: none; }
 
 /* 992px — Tablet */
 @media (max-width: 992px) {
-  .rekhi-sidebar    { display: none; }
-  .rekhi-mobile-nav { display: block; }
+  .rekhi-sidebar    { display: none !important; }
+  .rekhi-mobile-nav { display: none !important; }
   .rekhi-main       { padding: 28px 24px 60px; }
   .rekhi-hero       { padding: 40px 32px; min-height: 38vh; }
   .rekhi-hero.rekhi-hero-home { min-height: 50vh; padding: 60px 32px 40px; }
