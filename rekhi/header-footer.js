@@ -411,14 +411,7 @@
        ════════════════════════════════════════════════════ */
     function _initGSAP() {
 
-      /* ── Nav slide-down entrance ── */
-      gsap.from('#rekhi-nav', {
-        y: -80,
-        opacity: 0,
-        duration: 0.75,
-        ease: 'power3.out',
-        clearProps: 'transform,opacity'
-      });
+      /* ── Nav steady state across page transitions ── */
 
       /* ── Hero section entrance ── */
       var _heroLogo  = document.querySelector('.rekhi-hero-logo');
