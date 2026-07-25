@@ -5,7 +5,6 @@
  *   • Floating glassmorphic Rekhi-scoped navigation
  *   • Enterprise footer (pure CSS, no Tailwind)
  *   • Scroll-to-top button
- *   • GSAP entrance + ScrollTrigger reveal animations
  *
  * Each rekhi/ page only needs:
  *   <script src="header-footer.js"></script>
@@ -27,16 +26,6 @@
     document.head.appendChild(el);
   }
 
-  function loadScript(src, cb) {
-    var el = document.createElement('script');
-    el.src = src;
-    if (cb) el.onload = cb;
-    el.onerror = function () {
-      console.warn('[Rekhi] Failed to load script: ' + src);
-    };
-    document.head.appendChild(el);
-    return el;
-  }
 
   /* ═══════════════════════════════════════════════════════
      2. HEAD DEPENDENCIES
@@ -319,11 +308,6 @@
     updateActiveLinks();
     window.addEventListener('hashchange', updateActiveLinks);
 
-    /* ── Hero modifier for excellence.html ── */
-    if (_currentPage === 'excellence.html' || _currentPage === '') {
-      var _hero = document.querySelector('.rekhi-hero');
-      if (_hero) _hero.classList.add('rekhi-hero-home');
-    }
 
     /* ── Nav scroll effect ── */
     var _nav = document.getElementById('rekhi-nav');
@@ -390,239 +374,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
-
-    /* ── GSAP: load then initialise ── */
-    loadScript(
-      'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
-      function () {
-        loadScript(
-          'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
-          function () {
-            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-            gsap.registerPlugin(ScrollTrigger);
-            _initGSAP();
-          }
-        );
-      }
-    );
-
-    /* ════════════════════════════════════════════════════
-       GSAP ANIMATIONS
-       ════════════════════════════════════════════════════ */
-    function _initGSAP() {
-
-      /* ── Nav steady state across page transitions ── */
-
-      /* ── Hero section entrance ── */
-      var _heroLogo  = document.querySelector('.rekhi-hero-logo');
-      var _heroTitle = document.querySelector('.rekhi-hero-title');
-      var _heroSub   = document.querySelector('.rekhi-hero-sub');
-      var _heroBadge = document.querySelector('.rekhi-hero-badge');
-
-      if (_heroTitle) {
-        var _heroTl = gsap.timeline({ delay: 0.25 });
-
-        if (_heroLogo) {
-          _heroTl.from(_heroLogo, {
-            opacity: 0,
-            x: -36,
-            duration: 0.85,
-            ease: 'power3.out'
-          });
-        }
-
-        _heroTl.from(_heroTitle, {
-          opacity: 0,
-          y: 28,
-          duration: 0.75,
-          ease: 'power2.out'
-        }, _heroLogo ? '-=0.55' : 0);
-
-        if (_heroSub) {
-          _heroTl.from(_heroSub, {
-            opacity: 0,
-            y: 18,
-            duration: 0.65,
-            ease: 'power2.out'
-          }, '-=0.45');
-        }
-
-        if (_heroBadge) {
-          _heroTl.from(_heroBadge, {
-            opacity: 0,
-            scale: 0.75,
-            duration: 0.55,
-            ease: 'back.out(1.7)'
-          }, '-=0.35');
-        }
-      }
-
-      /* ── Helper: ScrollTrigger reveal ── */
-      function revealOnScroll(selector, vars) {
-        gsap.utils.toArray(selector).forEach(function (el) {
-          gsap.from(el, Object.assign({}, {
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 92%',
-              once: true
-            },
-            clearProps: 'transform,opacity'
-          }, vars));
-        });
-      }
-
-      /* ── Helper: stagger batch reveal ── */
-      function staggerReveal(selector, vars) {
-        var els = gsap.utils.toArray(selector);
-        if (!els.length) return;
-        ScrollTrigger.batch(els, {
-          start: 'top 92%',
-          once: true,
-          onEnter: function (batch) {
-            gsap.from(batch, Object.assign({}, vars, {
-              clearProps: 'transform,opacity'
-            }));
-          }
-        });
-      }
-
-      /* ── Section headings ── */
-      revealOnScroll('.section-heading', {
-        opacity: 0, y: 22,
-        duration: 0.65, ease: 'power2.out'
-      });
-
-      /* ── About block ── */
-      revealOnScroll('.about-block', {
-        opacity: 0, y: 32,
-        duration: 0.80, ease: 'power2.out'
-      });
-
-      /* ── Feature cards — staggered ── */
-      staggerReveal('.feature-card', {
-        opacity: 0, y: 36,
-        stagger: 0.13, duration: 0.72, ease: 'power2.out'
-      });
-
-      /* ── Blue panels ── */
-      revealOnScroll('.panel-blue', {
-        opacity: 0, y: 28,
-        duration: 0.80, ease: 'power2.out'
-      });
-
-      /* ── Person cards — individual triggers ── */
-      gsap.utils.toArray('.person-card').forEach(function (card, i) {
-        gsap.from(card, {
-          opacity: 0,
-          y: 30,
-          duration: 0.70,
-          ease: 'power2.out',
-          clearProps: 'transform,opacity',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 92%',
-            once: true
-          }
-        });
-      });
-
-      /* ── Avatar cards — staggered ── */
-      staggerReveal('.avatar-card', {
-        opacity: 0, y: 24, scale: 0.96,
-        stagger: 0.07, duration: 0.60, ease: 'power2.out'
-      });
-
-      /* ── Programme cards — staggered ── */
-      staggerReveal('.prog-card', {
-        opacity: 0, y: 28,
-        stagger: 0.12, duration: 0.70, ease: 'power2.out'
-      });
-
-      /* ── Generic cards ── */
-      revealOnScroll('.card', {
-        opacity: 0, y: 22,
-        duration: 0.60, ease: 'power2.out'
-      });
-
-      /* ── Engage items — slide from left ── */
-      staggerReveal('.engage-item', {
-        opacity: 0, x: -22,
-        stagger: 0.09, duration: 0.55, ease: 'power2.out'
-      });
-
-      /* ── Photo grid images — scale in ── */
-      gsap.utils.toArray('.photo-grid img').forEach(function (img, i) {
-        gsap.from(img, {
-          opacity: 0,
-          scale: 0.94,
-          duration: 0.80,
-          delay: i * 0.09,
-          ease: 'power2.out',
-          clearProps: 'transform,opacity',
-          scrollTrigger: {
-            trigger: img,
-            start: 'top 92%',
-            once: true
-          }
-        });
-      });
-
-      /* ── Announcements table ── */
-      revealOnScroll('.announce-table', {
-        opacity: 0, y: 24,
-        duration: 0.70, ease: 'power2.out'
-      });
-
-      /* ── Contact cards ── */
-      gsap.utils.toArray(
-        '.contact-hero-card, .contact-person-card, .contact-addr-card'
-      ).forEach(function (el, i) {
-        gsap.from(el, {
-          opacity: 0,
-          y: 24,
-          duration: 0.60,
-          delay: i * 0.08,
-          ease: 'power2.out',
-          clearProps: 'transform,opacity',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 92%',
-            once: true
-          }
-        });
-      });
-
-      /* ── Activity items — staggered list ── */
-      staggerReveal('.activity-item', {
-        opacity: 0, x: -16,
-        stagger: 0.08, duration: 0.50, ease: 'power2.out'
-      });
-
-      /* ── Prog items inside cards ── */
-      revealOnScroll('.prog-item', {
-        opacity: 0, x: -12,
-        duration: 0.45, ease: 'power2.out'
-      });
-
-      /* ── Footer columns fade in ── */
-      gsap.utils.toArray('#footer .rk-ft-grid > div').forEach(function (col, i) {
-        gsap.from(col, {
-          opacity: 0,
-          y: 20,
-          duration: 0.65,
-          delay: i * 0.10,
-          ease: 'power2.out',
-          clearProps: 'transform,opacity',
-          scrollTrigger: {
-            trigger: '#footer',
-            start: 'top 95%',
-            once: true
-          }
-        });
-      });
-
-      setTimeout(function () { ScrollTrigger.refresh(); }, 200);
-    } // end _initGSAP
 
   }); // end DOMContentLoaded
 
