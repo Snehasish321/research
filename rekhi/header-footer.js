@@ -68,7 +68,7 @@
     '  <div class="rn-inner">',
 
     '    <!-- Brand -->',
-    '    <a href="excellence.html" class="rn-brand" aria-label="Rekhi Centre of Excellence — Home">',
+    '    <a href="index.html" class="rn-brand" aria-label="Rekhi Centre of Excellence — Home">',
     '      <img class="rn-brand-logo"',
     '           src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/20063958/logo_601.png"',
     '           alt="Adamas University" width="40" height="40" loading="eager">',
@@ -81,7 +81,7 @@
     '    <!-- Desktop navigation links -->',
     '    <ul id="rn-desktop-links" class="rn-links" role="menubar" aria-label="Primary navigation">',
     '      <li role="none">',
-    '        <a href="excellence.html" class="rn-link" role="menuitem"',
+    '        <a href="index.html" class="rn-link" role="menuitem"',
     '           data-id="home">Home</a>',
     '      </li>',
     '      <li role="none">',
@@ -128,7 +128,7 @@
     '<div id="rekhi-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">',
 
     '  <div class="rn-drawer-header">',
-    '    <a href="excellence.html" class="rn-drawer-brand" tabindex="0">',
+    '    <a href="index.html" class="rn-drawer-brand" tabindex="0">',
     '      <img class="rn-drawer-logo"',
     '           src="https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/sites/45/2021/05/16141918/logo1.png"',
     '           alt="Adamas University" width="34" height="34">',
@@ -140,7 +140,7 @@
     '  </div>',
 
     '  <nav class="rn-drawer-nav" aria-label="Mobile navigation">',
-    '    <a href="excellence.html" class="rn-drawer-link" data-id="home">Home</a>',
+    '    <a href="index.html" class="rn-drawer-link" data-id="home">Home</a>',
     '    <a href="our-team.html"   class="rn-drawer-link" data-id="team">Our Team</a>',
     '    <a href="activities.html#infrastructure" class="rn-drawer-link" data-id="infrastructure">Infrastructure and Lab</a>',
     '    <a href="courses.html"    class="rn-drawer-link" data-id="courses">Courses and Programs</a>',
@@ -203,7 +203,7 @@
     '            <a href="https://research.adamasuniversity.ac.in/patents/" class="ft-link">Patents</a>',
     '            <a href="https://research.adamasuniversity.ac.in/extramural/" class="ft-link">Funded Projects</a>',
     '            <a href="https://research.adamasuniversity.ac.in/empaneled-supervisor/" class="ft-link">Ph.D. Program</a>',
-    '            <a href="excellence.html" class="ft-link">Rekhi Centre</a>',
+    '            <a href="index.html" class="ft-link">Rekhi Centre</a>',
     '          </div>',
     '        </div>',
 
@@ -262,14 +262,14 @@
 
     /* ── Active link detection ── */
     var _pathname    = window.location.pathname;
-    var _currentPage = _pathname.split('/').pop() || 'excellence.html';
-    if (_currentPage === '') _currentPage = 'excellence.html';
+    var _currentPage = _pathname.split('/').pop() || 'index.html';
+    if (_currentPage === '') _currentPage = 'index.html';
 
     function updateActiveLinks() {
       var hash = window.location.hash;
       var activeId = null;
 
-      if (_currentPage === 'excellence.html' || _currentPage === '') {
+      if (_currentPage === 'index.html' || _currentPage === '') {
         activeId = 'home';
       } else if (_currentPage === 'our-team.html') {
         activeId = 'team';
