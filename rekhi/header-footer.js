@@ -17,6 +17,7 @@
      1. DOM UTILITY HELPERS
      ═══════════════════════════════════════════════════════ */
   function addLink(rel, href, attrs) {
+    if (document.querySelector('link[href="' + href + '"]')) return;
     var el = document.createElement('link');
     el.rel  = rel;
     el.href = href;
@@ -28,7 +29,7 @@
 
 
   /* ═══════════════════════════════════════════════════════
-     2. HEAD DEPENDENCIES
+     2. HEAD DEPENDENCIES (Fallback if not in HTML head)
      ═══════════════════════════════════════════════════════ */
 
   /* Favicon */
@@ -36,11 +37,13 @@
 
   /* Google Fonts preconnect */
   addLink('preconnect', 'https://fonts.googleapis.com');
-  var _gc = document.createElement('link');
-  _gc.rel = 'preconnect';
-  _gc.href = 'https://fonts.gstatic.com';
-  _gc.crossOrigin = 'anonymous';
-  document.head.appendChild(_gc);
+  if (!document.querySelector('link[href="https://fonts.gstatic.com"]')) {
+    var _gc = document.createElement('link');
+    _gc.rel = 'preconnect';
+    _gc.href = 'https://fonts.gstatic.com';
+    _gc.crossOrigin = 'anonymous';
+    document.head.appendChild(_gc);
+  }
 
   /* Inter + Cinzel typography */
   addLink('stylesheet',
@@ -52,10 +55,7 @@
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css'
   );
 
-  /* Parent research site CSS (kept for compatibility) */
-  addLink('stylesheet', '../styles.css');
-
-  /* Rekhi-specific premium stylesheet */
+  /* Rekhi-specific stylesheet */
   addLink('stylesheet', 'styles.css');
 
 
@@ -250,24 +250,15 @@
   /* ═══════════════════════════════════════════════════════
      6. DOM READY — inject & initialise
      ═══════════════════════════════════════════════════════ */
-  document.addEventListener('DOMContentLoaded', function () {
-
-    /* Body base styles */
-    document.body.style.fontFamily   = "'Inter', system-ui, sans-serif";
-    document.body.style.overflowX    = 'hidden';
+  function initHeaderFooter() {
+    if (document.getElementById('rekhi-nav')) return;
 
     /* Inject header at the very top */
-    document.body.insertAdjacentHTML('afterbegin', HEADER_HTML);
-
-    /* Adjust page margin to clear new nav (68px) */
-    var page = document.getElementById('page');
-    if (page) page.style.marginTop = '68px';
-
-    /* Inject footer */
-    document.body.insertAdjacentHTML('beforeend', FOOTER_HTML);
-
-    /* Inject scroll-to-top */
-    document.body.insertAdjacentHTML('beforeend', STT_HTML);
+    if (document.body) {
+      document.body.insertAdjacentHTML('afterbegin', HEADER_HTML);
+      document.body.insertAdjacentHTML('beforeend', FOOTER_HTML);
+      document.body.insertAdjacentHTML('beforeend', STT_HTML);
+    }
 
     /* ── Active link detection ── */
     var _pathname    = window.location.pathname;
@@ -375,6 +366,12 @@
       });
     }
 
-  }); // end DOMContentLoaded
+  } // end initHeaderFooter
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeaderFooter);
+  } else {
+    initHeaderFooter();
+  }
 
 })();
